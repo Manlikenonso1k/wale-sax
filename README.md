@@ -1,4 +1,4 @@
-# Wale — Live Saxophonist (Ajah, Lagos)
+# Wale  Live Saxophonist (Ajah, Lagos)
 
 Landing page for Wale, a saxophonist who performs at homes, halls and hotels anywhere in Lagos. Every booking button, and the floating WhatsApp button bottom-right, opens a chat with **0903 603 3056** with a pre-filled message asking for date, location and occasion.
 
