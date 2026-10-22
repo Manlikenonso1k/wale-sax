@@ -1,6 +1,6 @@
 # Wale  Live Saxophonist (Ajah, Lagos)
 
-Landing page for Wale, a saxophonist who performs at homes, halls and hotels anywhere in Lagos. Every booking button, and the floating WhatsApp button bottom-right, opens a chat with **0903 603 3056** with a pre-filled message asking for date, location and occasion.
+Landing page for Wale, a saxophonist who performs at homes, halls and hotels anywhere in Lagos. Every booking button, and the floating WhatsApp button bottom-right, opens a chat with **0704 014 9133** with a pre-filled message asking for date, location and occasion.
 
 Plain static site: one `index.html` and an `images/` folder. No build step.
 
@@ -34,7 +34,7 @@ Search `index.html` for `[` to find every bracketed placeholder:
 
 ## Change the WhatsApp number or colours
 
-- **WhatsApp**: search for `wa.me/2349036033056` and `tel:+2349036033056` and replace the number in international format (no `+`, no leading `0`).
+- **WhatsApp**: search for `wa.me/2347040149133` and `tel:+2347040149133` and replace the number in international format (no `+`, no leading `0`).
 - **Accent colour**: edit `--accent` at the top of the `<style>` block.
 - **Pinstripes**: set `--stripes` to `none` to turn them off.
 
