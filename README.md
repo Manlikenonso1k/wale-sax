@@ -1,43 +1,34 @@
-# Wale  Live Saxophonist (Ajah, Lagos)
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Landing page for Wale, a saxophonist who performs at homes, halls and hotels anywhere in Lagos. Every booking button, and the floating WhatsApp button bottom-right, opens a chat with **0704 014 9133** with a pre-filled message asking for date, location and occasion.
+## Getting Started
 
-Plain static site: one `index.html` and an `images/` folder. No build step.
+First, run the development server:
 
-## Replace the images
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-Drop new photos into `images/` using the **same file names**:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-| File | Where it shows | Shape |
-| --- | --- | --- |
-| `wale-hero.jpg` | Hero (real photo, Efizzy Studios) | 1200×1553 portrait |
-| `wale-sax-detail.jpg` | "Based in Ajah. Plays anywhere." | 4:5 portrait |
-| `occ-weddings.jpg` | Occasions: Weddings | 4:5 portrait |
-| `occ-birthdays.jpg` | Occasions: Birthdays & surprises | 4:5 portrait |
-| `occ-proposals.jpg` | Occasions: Proposals & anniversaries | 4:5 portrait |
-| `occ-dinners.jpg` | Occasions: Dinners, launches & lounges | 4:5 portrait |
-| `gal-video.jpg` | Watch: video poster | 16:9 landscape |
-| `gal-1.jpg` – `gal-4.jpg` | Watch: photo grid | 1:1 square |
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-Keep photos under ~300 KB each (export at 80% JPEG quality) so the page loads fast on mobile data.
+## Learn More
 
-## Fill in the placeholders
+To learn more about Next.js, take a look at the following resources:
 
-Search `index.html` for `[` to find every bracketed placeholder:
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- `[00]+` events played and `[0] years` on stage (hero)
-- Client quotes, names and events (one big quote + three cards)
-- `[@handle]` Instagram (Watch section and footer); change those links' `href` too
-- The video link: the big video tile and "More on Instagram" point at `#watch`, so swap in the real Instagram/YouTube URL
-- FAQ: optional starting price, and whether Wale brings his own sound
-- The genre chips under "He plays", trimmed to what he actually plays
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Change the WhatsApp number or colours
+## Deploy on Vercel
 
-- **WhatsApp**: search for `wa.me/2347040149133` and `tel:+2347040149133` and replace the number in international format (no `+`, no leading `0`).
-- **Accent colour**: edit `--accent` at the top of the `<style>` block.
-- **Pinstripes**: set `--stripes` to `none` to turn them off.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## Deploy
-
-Any static host works: GitHub Pages (Settings → Pages → deploy from `main`, root), Netlify, Vercel, or upload the folder to Hostinger's `public_html`.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
