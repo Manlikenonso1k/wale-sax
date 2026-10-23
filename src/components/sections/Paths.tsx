@@ -28,7 +28,7 @@ export function Paths() {
           {pathsCards(site).map((c) => (
             <li key={c.href}>
               <HudFrame as="article" className="panel path-card" leg={16}>
-                <div className="path-card__inner" data-fx="tilt">
+                <div className="path-card__inner" data-fx="tilt spotlight" data-tilt-max="8">
                   <OrbitGlyph />
                   <p className="t-caption path-card__label">{c.label}</p>
                   <h3 className="t-card-title path-card__title">{c.title}</h3>

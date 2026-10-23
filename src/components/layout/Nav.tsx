@@ -1,12 +1,14 @@
 import { site } from '@/content/site';
 import { defaultLinks } from '@/lib/whatsapp';
-import { Button } from '@/components/ui/Button';
+import { ContactPopover } from '@/components/overlays/ContactPopover';
+import { contactOptions } from '@/components/overlays/WhatsAppWidget';
 import { Icon } from '@/components/ui/Icon';
 import { Wordmark } from './Wordmark';
+import { NavController } from './NavController';
 
 /**
- * Sticky nav (§6.3, §7.18). M1: static. The Menu link opens a CSS (:target) panel
- * that works without JS; M2 replaces it with the Mobile Sheet.
+ * Sticky nav (§6.3, §7.18). Without JS the Menu link opens a CSS (:target) panel;
+ * with JS (overlays ready) it opens the Mobile Sheet. “Message Wale” opens the Contact Menu.
  */
 export function Nav() {
   return (
@@ -27,9 +29,16 @@ export function Nav() {
           </ul>
         </nav>
         <div className="nav__actions">
-          <Button href={defaultLinks.general} size="S" console="contact" icon={null} className="nav__cta">
-            {site.nav.cta}
-          </Button>
+          <ContactPopover
+            variant="menu"
+            href={defaultLinks.general}
+            triggerClassName="btn btn--primary btn--s press nav__cta"
+            triggerContent={<span>{site.nav.cta}</span>}
+            panelLabel={site.nav.cta}
+            closeLabel={site.ui.close}
+            closeIcon={<Icon name="close" size={18} />}
+            options={contactOptions()}
+          />
           <a className="nav__menu press" href="#mobile-menu" data-open="sheet">
             <Icon name="menu" size={18} />
             <span>{site.ui.menu}</span>
@@ -50,6 +59,8 @@ export function Nav() {
           <Icon name="close" size={20} />
         </a>
       </nav>
+      <span className="scroll-progress" aria-hidden="true" />
+      <NavController />
     </header>
   );
 }

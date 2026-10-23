@@ -2,6 +2,7 @@ import { site } from '@/content/site';
 import { footerName, instagramLink } from '@/content/derive';
 import { defaultLinks } from '@/lib/whatsapp';
 import { Wordmark } from './Wordmark';
+import { MotionToggle } from './MotionToggle';
 
 export function Footer() {
   const { fullName } = footerName(site);
@@ -32,7 +33,9 @@ export function Footer() {
               <span className="footer__text">{igText}</span>
             )}
           </li>
-          {/* Motion: On/Off toggle arrives in M2 (needs JS; rendered only after mount). */}
+          <li className="footer__toggle">
+            <MotionToggle label={site.ui.motionLabel} on={site.ui.motionOn} off={site.ui.motionOff} />
+          </li>
           <li>
             <span className="footer__text footer__faint">{site.footer.copyright}</span>
           </li>

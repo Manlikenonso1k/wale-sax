@@ -22,7 +22,7 @@ export function LessonsWho() {
         </header>
         <ul className="who__grid" data-reveal="rise" data-stagger="90">
           {whoCards(site).map((c) => (
-            <li key={c.key} className="panel who-card" data-fx="tilt spotlight">
+            <li key={c.key} className="panel who-card" data-fx="tilt spotlight" data-tilt-max="4">
               <span className="who-card__icon">
                 <Icon name={ICONS[c.key]} size={22} />
               </span>

@@ -3,10 +3,11 @@ import { faqItems } from '@/content/derive';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Icon } from '@/components/ui/Icon';
+import { Accordion } from '@/components/ui/Accordion';
 
 /**
- * FAQ (§6.10). M1: every answer is rendered open (readable without JS).
- * M2 turns each question into an accordion button that collapses after hydration.
+ * FAQ (§6.10, §7.16): two labelled groups of accordions. Answers are server-rendered open
+ * (readable without JS) and collapse after hydration.
  */
 export function Faq() {
   const f = site.faq;
@@ -18,23 +19,11 @@ export function Faq() {
           <SectionHeading id="faq-title" text={f.heading} />
         </header>
         {faqItems(site).map((g) => (
-          <div key={g.id} className="faq__group">
+          <div key={g.id} className="faq__group" role="group" aria-labelledby={`faq-group-${g.id}`}>
             <h3 className="t-caption faq__group-label" id={`faq-group-${g.id}`}>
               {g.label}
             </h3>
-            <ul className="faq__list" aria-labelledby={`faq-group-${g.id}`}>
-              {g.items.map((it) => (
-                <li key={it.id} className="faq__item">
-                  <h4 className="t-faq-q faq__q" id={`${it.id}-q`}>
-                    <span>{it.q}</span>
-                    <Icon name="plus" size={20} strokeWidth={1.8} className="faq__plus" />
-                  </h4>
-                  <div className="faq__a" id={`${it.id}-a`} role="region" aria-labelledby={`${it.id}-q`}>
-                    <p>{it.a}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <Accordion items={g.items} icon={<Icon name="plus" size={20} strokeWidth={1.8} />} />
           </div>
         ))}
       </div>

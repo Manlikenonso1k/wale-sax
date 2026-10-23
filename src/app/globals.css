@@ -32,6 +32,11 @@
   --rails: repeating-linear-gradient(90deg, rgb(244 239 230 / 0.035) 0 1px, transparent 1px 22px);
   --gutter: clamp(16px, 4vw, 40px);
   --nav-h: 68px;
+
+  /* Springs as CSS linear() easings (§10.2, motion-tokens.ts) */
+  --spring-ui: linear(0, 0.0759, 0.2287, 0.3925, 0.5391, 0.6594, 0.7531, 0.8237, 0.8756, 0.913, 0.9397, 0.9585, 0.9716, 0.9806, 0.9869, 0.9911, 0.994, 0.996, 0.9973, 0.9982, 1);
+  --spring-sheet: linear(0, 0.0386, 0.131, 0.2502, 0.3773, 0.5003, 0.6119, 0.7086, 0.7891, 0.8539, 0.9044, 0.9424, 0.97, 0.9891, 1.0018, 1.0094, 1.0135, 1.0151, 1.0149, 1.0138, 1.0121, 1.0102, 1.0083, 1.0065, 1);
+  --ease-reveal: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 @theme inline {
@@ -401,6 +406,7 @@ main:focus {
     background-color 200ms ease,
     border-color 200ms ease,
     color 200ms ease,
+    translate 0.35s var(--spring-ui),
     transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -578,12 +584,12 @@ main:focus {
 /* Soft edge mask: the photo's black background dissolves into the void (§7.1) */
 .edge-mask img {
   -webkit-mask-image:
-    linear-gradient(to bottom, transparent 0, #000 6%, #000 76%, transparent 100%),
-    linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
+    radial-gradient(ellipse 62% 56% at 52% 44%, #000 46%, rgb(0 0 0 / 0.55) 70%, transparent 100%),
+    linear-gradient(to bottom, #000 64%, transparent 97%);
   -webkit-mask-composite: source-in;
   mask-image:
-    linear-gradient(to bottom, transparent 0, #000 6%, #000 76%, transparent 100%),
-    linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
+    radial-gradient(ellipse 62% 56% at 52% 44%, #000 46%, rgb(0 0 0 / 0.55) 70%, transparent 100%),
+    linear-gradient(to bottom, #000 64%, transparent 97%);
   mask-composite: intersect;
 }
 
@@ -1110,6 +1116,7 @@ html[data-tier="high"] .nav {
 }
 
 .occasion__media {
+  position: relative;
   overflow: hidden;
   border-radius: 4px;
   aspect-ratio: 4 / 5;
@@ -1470,6 +1477,8 @@ html[data-tier="high"] .nav {
   width: 72px;
   height: 1px;
   background: var(--brass);
+  transform: scaleX(var(--turn, 1));
+  transform-origin: 0 50%;
 }
 
 /* ═══ Who it’s for (§7.12) ════════════════════════════════════════════════ */
@@ -1540,6 +1549,41 @@ html[data-tier="high"] .nav {
 
 .path__signal {
   display: none;
+  position: absolute;
+  left: 7px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--brass);
+  box-shadow: 0 0 10px rgb(212 166 74 / 0.6);
+  transform-origin: 50% 0;
+}
+
+.path__flight.is-scrub .path__line {
+  background: var(--hairline-16);
+}
+
+.path__flight.is-scrub .path__signal {
+  display: block;
+}
+
+.path__flight.is-scrub .stage__node {
+  background: var(--ink-3);
+  box-shadow:
+    0 0 0 4px var(--ink-0),
+    inset 0 0 0 1px rgb(212 166 74 / 0.6);
+  transition:
+    transform 0.35s var(--spring-sheet),
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.path__flight.is-scrub .stage.is-lit .stage__node {
+  background: var(--brass);
+  transform: scale(1.25);
+  box-shadow:
+    0 0 0 4px var(--ink-0),
+    0 0 18px rgb(212 166 74 / 0.55);
 }
 
 .path__stages {
@@ -1657,9 +1701,25 @@ html[data-tier="high"] .nav {
 
 .gtile {
   position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
   overflow: hidden;
   border-radius: 6px;
   background: var(--ink-2);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: zoom-in;
+}
+
+.gtile img {
+  transition: transform 700ms var(--ease-reveal);
+}
+
+.gtile:focus-visible {
+  border-radius: 6px;
 }
 
 .gtile--wide {
@@ -1710,17 +1770,55 @@ html[data-tier="high"] .nav {
 }
 
 .faq__q {
+  display: block;
+}
+
+.faq__button {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+  width: 100%;
   min-height: 48px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq__button:hover {
+  color: var(--brass-hi);
 }
 
 .faq__plus {
+  display: inline-flex;
   flex: none;
   color: var(--brass);
+  transition: transform 0.35s var(--spring-ui);
+}
+
+.faq__item[data-state="open"] .faq__plus {
   transform: rotate(45deg);
+}
+
+.faq__a {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.35s var(--spring-ui);
+}
+
+.faq__a[data-state="closed"] {
+  grid-template-rows: 0fr;
+}
+
+.faq__a-inner {
+  min-height: 0;
+  overflow: hidden;
 }
 
 .faq__a p {
@@ -1938,7 +2036,1074 @@ body:has(#mobile-menu:target) .wa-widget {
   display: none;
 }
 
-/* M1: answers are static and always open; the plus icon returns with the M2 accordion. */
-.faq__plus {
+
+/* ═══════════════════════════════════════════════════════════════════════
+   M2 — motion system, pop-ups, consoles, widget, sheet, lightbox
+   Rule: nothing is hidden by static CSS (pitfall 13). Entrance animations below
+   are CSS animations that always finish, gated on motion being on.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* No-break groups from site.ts bind on phones only (D-021). */
+@media (max-width: 639.98px) {
+  .keep {
+    white-space: nowrap;
+  }
+}
+
+/* ─── Hero rails as their own layer (so they can draw in) ─────────────── */
+.hero.rails {
+  background-image: none;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--rails);
+  pointer-events: none;
+}
+
+/* ─── Sticky nav: hide on scroll-down, scroll progress (§7.18) ─────────── */
+.nav {
+  transition: transform 0.35s var(--spring-ui);
+}
+
+.nav.nav--hidden:not(:focus-within) {
+  transform: translateY(calc(-100% - 20px));
+}
+
+.scroll-progress {
   display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--brass);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    display: block;
+    animation: progress linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ─── Popovers: Contact Menu + WhatsApp widget panel (§9.4) ───────────── */
+.popover {
+  position: relative;
+}
+
+.popover__panel {
+  position: absolute;
+  z-index: 55;
+  width: min(320px, calc(100vw - 32px));
+  padding: 10px;
+  border-radius: 16px;
+  border: 1px solid var(--hairline-16);
+  background: var(--surface-solid);
+  box-shadow: 0 28px 70px -16px rgb(0 0 0 / 0.75);
+  text-align: left;
+  animation: pop-in 0.35s var(--spring-ui) both;
+}
+
+html[data-tier="high"] .popover__panel {
+  background: rgb(20 18 21 / 0.82);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+}
+
+.popover__panel[data-state="closing"] {
+  animation: pop-out 0.2s ease-in both;
+}
+
+.popover--widget .popover__panel {
+  right: 0;
+  bottom: calc(100% + 12px);
+  transform-origin: 100% 100%;
+}
+
+.popover--menu .popover__panel {
+  right: 0;
+  top: calc(100% + 10px);
+  transform-origin: 100% 0;
+}
+
+.popover__head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 52px 12px 12px;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 6px;
+}
+
+.popover__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ivory);
+}
+
+.popover__status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--faint);
+}
+
+.popover__status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--coral);
+}
+
+.popover__options li {
+  animation: pop-option 0.35s var(--spring-ui) both;
+  animation-delay: calc(var(--i, 0) * 40ms + 60ms);
+}
+
+.popover__option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 0 12px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ivory);
+  text-decoration: none;
+  transition: background-color 160ms ease;
+}
+
+.popover__option:hover {
+  background: var(--ink-3);
+}
+
+.popover__icon {
+  display: inline-flex;
+  color: var(--brass);
+}
+
+.popover__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.popover__close:hover {
+  color: var(--ivory);
+}
+
+.popover--menu .popover__close {
+  display: none;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes pop-out {
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes pop-option {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* ─── Motion toggle (M-13) ─────────────────────────────────────────────── */
+.motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.motion-toggle:hover {
+  color: var(--ivory);
+}
+
+.motion-toggle__state {
+  color: var(--ivory-2);
+}
+
+.motion-toggle__track {
+  position: relative;
+  width: 34px;
+  height: 20px;
+  margin-left: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline-22);
+}
+
+.motion-toggle__thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--faint);
+  transition:
+    transform 0.35s var(--spring-ui),
+    background-color 0.2s ease;
+}
+
+.motion-toggle[aria-checked="true"] .motion-toggle__thumb {
+  transform: translateX(14px);
+  background: var(--brass);
+}
+
+.footer__toggle:empty {
+  display: none;
+}
+
+/* ─── Modals: consoles + Mobile Sheet (§9.1–9.3, §9.7) ─────────────────── */
+.modal__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgb(10 9 11 / 0.7);
+}
+
+html[data-tier="high"] .modal__scrim {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  html[data-tier="high"] .modal__scrim {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+.modal__frame {
+  position: fixed;
+  inset: 0;
+  z-index: 81;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  pointer-events: none;
+}
+
+.modal__frame--sheet {
+  align-items: end;
+  justify-items: stretch;
+  padding: 0;
+}
+
+.modal__panel {
+  pointer-events: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(560px, 100%);
+  max-height: min(90svh, 880px);
+  border-radius: 16px;
+  border: 1px solid var(--hairline-16);
+  background: var(--ink-2);
+  box-shadow: 0 40px 100px -20px rgb(0 0 0 / 0.85);
+  overflow: hidden;
+  outline: none;
+}
+
+.modal__panel--sheet {
+  width: 100%;
+  max-height: 92svh;
+  border-radius: 16px 16px 0 0;
+  border-bottom: 0;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.modal__grab {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 0;
+  cursor: grab;
+  touch-action: none;
+}
+
+.modal__handle {
+  width: 40px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--hairline-22);
+}
+
+.modal__head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px 68px 14px 24px;
+}
+
+.modal__panel--sheet .modal__head {
+  padding-top: 12px;
+  touch-action: none;
+}
+
+.modal__title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ivory);
+}
+
+.modal__subtitle {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.modal__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline-22);
+  background: transparent;
+  color: var(--ivory);
+  cursor: pointer;
+}
+
+.modal__panel--sheet .modal__close {
+  top: 18px;
+}
+
+.modal__close:hover {
+  border-color: rgb(212 166 74 / 0.6);
+}
+
+.modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 6px 24px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Console form */
+.console__form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.field__label {
+  padding: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.field--chips .field__label {
+  margin-bottom: 10px;
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--hairline-16);
+  background: var(--ink-3);
+  color: var(--ivory);
+  font: inherit;
+  font-size: 16px;
+  color-scheme: dark;
+}
+
+.input::placeholder {
+  color: var(--faint);
+}
+
+.input:hover {
+  border-color: var(--hairline-22);
+}
+
+.input:focus-visible {
+  border-color: rgb(212 166 74 / 0.6);
+  border-radius: 10px;
+}
+
+.input:disabled {
+  opacity: 0.5;
+}
+
+.input--area {
+  min-height: 96px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.input--short {
+  max-width: 140px;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-size: 15px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.check input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--brass);
+}
+
+.chip-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip-option {
+  position: relative;
+  display: inline-flex;
+}
+
+.chip-option input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.chip-option span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline-16);
+  background: var(--ink-3);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ivory-2);
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 80ms ease-out;
+}
+
+.chip-option:hover span {
+  border-color: var(--hairline-22);
+}
+
+.chip-option input:checked + span {
+  background: rgb(212 166 74 / 0.16);
+  border-color: rgb(212 166 74 / 0.6);
+  color: var(--ivory);
+}
+
+.chip-option input:focus-visible + span {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+}
+
+.chip-option:active span {
+  transform: scale(0.97);
+}
+
+.preview {
+  padding: 18px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--hairline);
+  background: var(--ink-1);
+}
+
+.preview__title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.preview__text {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--mist);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.console__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.console__send {
+  width: 100%;
+}
+
+.console__hi {
+  align-self: center;
+}
+
+/* Mobile Sheet */
+.sheet__links {
+  display: flex;
+  flex-direction: column;
+}
+
+.sheet__link {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ivory);
+  text-decoration: none;
+}
+
+.sheet__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* ─── Lightbox (§9.5) ──────────────────────────────────────────────────── */
+.lightbox__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgb(10 9 11 / 0.94);
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 91;
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+
+.lightbox__stage {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  padding: 72px 16px 8px;
+  touch-action: none;
+  user-select: none;
+}
+
+.lightbox__frame {
+  padding: 0;
+}
+
+.lightbox__img,
+.lightbox__video {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 92vw;
+  max-height: min(80svh, calc(100svh - 190px));
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+.lightbox__hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px var(--gutter) calc(24px + env(safe-area-inset-bottom));
+}
+
+.lightbox__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  min-width: 0;
+}
+
+.lightbox__counter {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--brass);
+  font-variant-numeric: lining-nums;
+}
+
+.lightbox__caption {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.lightbox__nav {
+  display: flex;
+  gap: 8px;
+}
+
+.lightbox__btn,
+.lightbox__close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline-22);
+  background: var(--ink-2);
+  color: var(--ivory);
+  cursor: pointer;
+}
+
+.lightbox__btn:hover,
+.lightbox__close:hover {
+  border-color: rgb(212 166 74 / 0.6);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+/* ─── Desktop effects (FxLayer, §10.5) ─────────────────────────────────── */
+[data-fx~="tilt"] {
+  transition: transform 0.35s var(--spring-ui);
+}
+
+[data-fx~="tilt"].is-tilting {
+  transition: transform 0.12s linear;
+}
+
+.hero__sheen,
+.hero__scan {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 4px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.hero__sheen {
+  mix-blend-mode: soft-light;
+  background: linear-gradient(115deg, transparent 30%, rgb(244 239 230 / 0.9) 48%, rgb(212 166 74 / 0.9) 58%, transparent 74%);
+  background-size: 240% 240%;
+  background-position: var(--mx, 50%) var(--my, 50%);
+}
+
+.hero__scan {
+  background: repeating-linear-gradient(0deg, rgb(244 239 230 / 0.05) 0 1px, transparent 1px 4px);
+}
+
+html[data-fx="on"] .hero__portrait:hover .hero__sheen {
+  opacity: 0.1;
+}
+
+html[data-fx="on"] .hero__portrait:hover .hero__scan {
+  opacity: 1;
+}
+
+[data-fx~="spotlight"] {
+  position: relative;
+}
+
+html[data-fx="on"] [data-fx~="spotlight"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgb(212 166 74 / 0.1), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+html[data-fx="on"] [data-fx~="spotlight"]:hover::after {
+  opacity: 1;
+}
+
+.cursor-follower {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border: 1px solid var(--brass);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    width 0.35s var(--spring-ui),
+    height 0.35s var(--spring-ui),
+    margin 0.35s var(--spring-ui),
+    opacity 0.2s ease;
+}
+
+.cursor-follower.is-visible {
+  opacity: 0.7;
+}
+
+.cursor-follower.is-hot {
+  width: 48px;
+  height: 48px;
+  margin: -24px 0 0 -24px;
+}
+
+@media (pointer: fine) {
+  .path-card {
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .path-card:hover {
+    border-color: rgb(212 166 74 / 0.45);
+    box-shadow: 0 24px 70px -28px rgb(212 166 74 / 0.35);
+  }
+}
+
+/* ─── Shimmer (§7.4) ───────────────────────────────────────────────────── */
+.t-h2 em.shimmer {
+  background: linear-gradient(100deg, var(--brass) 35%, var(--brass-hi) 45%, var(--ivory) 50%, var(--brass-hi) 55%, var(--brass) 65%);
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 1.2s var(--ease-reveal) 1 both;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* ─── Motion-on only: hero intro and ambient details ───────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero intro (§7.1): CSS only, runs before hydration, total ≤ 1.4s. */
+  html:not([data-motion="off"]) .hero::before {
+    -webkit-mask-image: linear-gradient(172deg, #000 0 40%, transparent 60%);
+    mask-image: linear-gradient(172deg, #000 0 40%, transparent 60%);
+    -webkit-mask-size: 100% 250%;
+    mask-size: 100% 250%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    animation: rails-draw 1.1s var(--ease-reveal) both;
+  }
+
+  html:not([data-motion="off"]) .hero__eyebrow {
+    animation: fade-in 0.5s ease-out both;
+  }
+
+  html:not([data-motion="off"]) .hero__word {
+    display: inline-block;
+    animation: word-rise 0.9s var(--ease-reveal) both;
+    animation-delay: calc(100ms + var(--i, 0) * 70ms);
+  }
+
+  html:not([data-motion="off"]) .hero__lead {
+    animation: rise-in 0.55s var(--ease-reveal) 0.46s both;
+  }
+
+  html:not([data-motion="off"]) .hero__ctas,
+  html:not([data-motion="off"]) .hero__micro {
+    animation: rise-in 0.55s var(--ease-reveal) 0.64s both;
+  }
+
+  html:not([data-motion="off"]) .hero__stats {
+    animation: rise-in 0.55s var(--ease-reveal) 0.82s both;
+  }
+
+  /* Portrait: never hidden; only scale 1.03→1 plus brightness. */
+  html:not([data-motion="off"]) .hero__frame .picture img {
+    animation: portrait-in 1.2s var(--ease-reveal) both;
+  }
+
+  html:not([data-motion="off"]) .hero__frame .hud__tick {
+    animation: tick-draw 0.7s var(--ease-reveal) 0.5s both;
+  }
+
+  html:not([data-motion="off"]) .hero__frame .hud__tick--tl {
+    transform-origin: 0 0;
+  }
+
+  html:not([data-motion="off"]) .hero__frame .hud__tick--tr {
+    transform-origin: 100% 0;
+  }
+
+  html:not([data-motion="off"]) .hero__frame .hud__tick--bl {
+    transform-origin: 0 100%;
+  }
+
+  html:not([data-motion="off"]) .hero__frame .hud__tick--br {
+    transform-origin: 100% 100%;
+  }
+
+  /* Live dot breathe (§5.6) */
+  html:not([data-motion="off"]) .live-dot {
+    animation: breathe 2.4s ease-in-out infinite;
+  }
+
+  /* Ajah base: slow pulsing ring (§7.9) */
+  html:not([data-motion="off"]) .constellation__node.is-home .constellation__dot::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgb(212 166 74 / 0.7);
+    animation: ring 3.2s ease-out infinite;
+  }
+
+  /* Paths orbit glyph: dot travels the ellipse, 12s per loop (§7.2) */
+  @supports (offset-path: path("M0 0")) {
+    html:not([data-motion="off"]) .orbit-glyph__dot {
+      cx: 0;
+      cy: 0;
+      offset-path: path("M114 24 A54 16 0 1 1 6 24 A54 16 0 1 1 114 24");
+      animation: orbit 12s linear infinite;
+    }
+  }
+
+  /* Occasions hover (pointer: fine): image scale + one brass scanline sweep (§7.5) */
+  @media (pointer: fine) {
+    html:not([data-motion="off"]) .occasion__media img {
+      transition: transform 700ms var(--ease-reveal);
+    }
+
+    html:not([data-motion="off"]) .occasion:hover .occasion__media img,
+    html:not([data-motion="off"]) .gtile:hover img {
+      transform: scale(1.035);
+    }
+
+    html:not([data-motion="off"]) .occasion__media::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -25%;
+      height: 25%;
+      background: linear-gradient(transparent, rgb(212 166 74 / 0.18), transparent);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    html:not([data-motion="off"]) .occasion:hover .occasion__media::after {
+      animation: sweep 1.1s var(--ease-reveal) 1;
+    }
+  }
+}
+
+/* Motion off: pop-ups use a short cross-fade instead of the spring. */
+html[data-motion="off"] .popover__panel,
+html[data-motion="off"] .popover__options li {
+  animation: fade-in 0.15s ease-out both;
+}
+
+html[data-motion="off"] .popover__panel[data-state="closing"] {
+  animation: fade-out 0.15s ease-in both;
+}
+
+html[data-motion="off"] .nav,
+html[data-motion="off"] .faq__a,
+html[data-motion="off"] .faq__plus,
+html[data-motion="off"] [data-fx~="tilt"] {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popover__panel,
+  .popover__options li {
+    animation: fade-in 0.15s ease-out both;
+  }
+
+  .popover__panel[data-state="closing"] {
+    animation: fade-out 0.15s ease-in both;
+  }
+
+  .nav,
+  .faq__a,
+  .faq__plus {
+    transition: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes rails-draw {
+  from {
+    -webkit-mask-position: 0 100%;
+    mask-position: 0 100%;
+  }
+
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+@keyframes word-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@keyframes portrait-in {
+  from {
+    transform: scale(1.03);
+    filter: brightness(0.72);
+  }
+}
+
+@keyframes tick-draw {
+  from {
+    transform: scale(0);
+  }
+}
+
+@keyframes breathe {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes ring {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@keyframes orbit {
+  from {
+    offset-distance: 0%;
+  }
+
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes sweep {
+  0% {
+    top: -25%;
+    opacity: 1;
+  }
+
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
 }
