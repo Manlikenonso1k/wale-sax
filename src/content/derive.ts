@@ -126,11 +126,11 @@ export function lessonsConsoleQuestions(s: Site) {
   };
 }
 
-/** Gallery items, validated (1–24). */
+/** Gallery items, validated (1–40). */
 export function galleryItems(s: Site): GalleryItem[] {
   const items = s.gallery;
-  if (items.length < 1 || items.length > 24) {
-    throw new Error(`site.ts: the gallery needs 1 to 24 items (it has ${items.length}).`);
+  if (items.length < 1 || items.length > 40) {
+    throw new Error(`site.ts: the gallery needs 1 to 40 items (it has ${items.length}).`);
   }
   return items;
 }

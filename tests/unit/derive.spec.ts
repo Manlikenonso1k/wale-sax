@@ -138,12 +138,12 @@ for (const sound of [null, 'own', 'venue', 'either'] as const) {
   }
 }
 
-test('Q6 gallery: 1–24 items, counter, video behaviour', () => {
+test('Q6 gallery: 1–40 items, counter, video behaviour', () => {
   expect(() => galleryItems({ ...site, gallery: [] })).toThrow();
-  const many = Array.from({ length: 25 }, (_, i) => ({ ...site.gallery[1], id: `x${i}` }));
+  const many = Array.from({ length: 41 }, (_, i) => ({ ...site.gallery[1], id: `x${i}` }));
   expect(() => galleryItems({ ...site, gallery: many })).toThrow();
-  expect(galleryItems({ ...site, gallery: many.slice(0, 24) })).toHaveLength(24);
-  expect(galleryCounter(site, 1)).toBe('02 / 05');
+  expect(galleryItems({ ...site, gallery: many.slice(0, 40) })).toHaveLength(40);
+  expect(galleryCounter(site, 1)).toBe('02 / 32');
   const v = site.gallery[0];
   expect(isPlayableVideo(v)).toBe(false); // neither videoSrc nor externalUrl → behaves like a photo
   expect(isPlayableVideo({ ...v, videoSrc: '/videos/x.mp4' })).toBe(true);

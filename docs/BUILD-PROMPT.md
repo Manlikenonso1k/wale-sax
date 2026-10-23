@@ -612,7 +612,7 @@ export const site = {
 
 If `as const` inference gets awkward with the nullable fields and mixed gallery items, declare a `SiteContent` interface and annotate `site` with it instead. The field names and values above stay the same.
 
-The gallery accepts any number of items (1–24). The README explains how to add `gal-5.jpg` and a new entry. A `video` item with neither `videoSrc` nor `externalUrl` behaves like a photo (no play affordance).
+The gallery accepts 1–40 items. The README explains how to add a new image and entry. A `video` item with neither `videoSrc` nor `externalUrl` behaves like a photo (no play affordance).
 
 ### 6.3 Global elements
 
