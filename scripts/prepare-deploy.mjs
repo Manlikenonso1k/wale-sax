@@ -15,7 +15,7 @@ copyFileSync(join('deploy', 'htaccess-static'), join(OUT, '_next', 'static', '.h
 
 const required = [
   'index.html', '404.html', '.htaccess', '_next/static/.htaccess',
-  'robots.txt', 'sitemap.xml', '_img/og.jpg', 'images/wale-hero.jpg',
+  'robots.txt', 'sitemap.xml', '_img/og.jpg', 'images/kent-hero.jpg',
 ];
 const missing = required.filter((f) => !existsSync(join(OUT, f)));
 if (missing.length) fail(`missing from out/: ${missing.join(', ')}`);

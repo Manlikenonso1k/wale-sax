@@ -769,13 +769,32 @@ html[data-tier="high"] .nav {
   text-decoration: none;
 }
 
-@media (max-width: 519.98px) {
+.wordmark__short {
+  display: none;
+}
+
+@media (max-width: 639.98px) {
   .nav .wordmark__label {
     display: none;
   }
+
+  .nav .wordmark__name {
+    font-size: 24px;
+  }
 }
 
-@media (max-width: 399.98px) {
+/* Very narrow phones: “Music by Kent” would push the nav buttons off-screen. */
+@media (max-width: 384.98px) {
+  .nav .wordmark__full {
+    display: none;
+  }
+
+  .nav .wordmark__short {
+    display: inline;
+  }
+}
+
+@media (max-width: 479.98px) {
   .nav__menu {
     padding: 0;
   }

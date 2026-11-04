@@ -41,7 +41,7 @@ const PAIRS: [string, string, string][] = [
   ['Card title (occasion)', '#occasions h3 >> nth=0', 'h3:text-is("Weddings")'],
   ['Button (hero primary, L)', '.hero__ctas a >> nth=0', 'h1 ~ div a.btn >> nth=0'],
   ['Chip (area: Ajah)', '#coverage li.chip >> nth=0', 'li:text-is("Ajah")'],
-  ['Wordmark (nav)', 'header .wordmark__name', 'header span:text-is("Wale")'],
+  ['Wordmark (nav)', 'header .wordmark__name', 'header span:text-is("Kent")'],
 ];
 
 const familyClass = (f: string) => (/Bodoni/.test(f) ? 'Bodoni' : /Instrument/.test(f) ? 'Instrument' : `OTHER(${f})`);
@@ -65,7 +65,9 @@ for (const width of [390, 1440]) {
       const l = await styleOf(b.page, legacySel);
       const fam = [familyClass(n.fontFamily), familyClass(l.fontFamily)];
       if (fam[0] !== fam[1]) problems.push(`${role}: font-family ${fam[0]} vs legacy ${fam[1]}`);
-      if (Math.abs(n.fontSize - l.fontSize) > 0.5) problems.push(`${role}: font-size ${n.fontSize}px vs legacy ${l.fontSize}px`);
+      // D-021: the longer “Music by Kent” wordmark is 24px in the nav below 640px (legacy “Kent” stays 28px).
+      const sizeExempt = role === 'Wordmark (nav)' && width < 640;
+      if (!sizeExempt && Math.abs(n.fontSize - l.fontSize) > 0.5) problems.push(`${role}: font-size ${n.fontSize}px vs legacy ${l.fontSize}px`);
       if (n.fontWeight !== l.fontWeight) problems.push(`${role}: font-weight ${n.fontWeight} vs legacy ${l.fontWeight}`);
       if (n.fontStyle !== l.fontStyle) problems.push(`${role}: font-style ${n.fontStyle} vs legacy ${l.fontStyle}`);
       if (role.startsWith('Card title')) {
@@ -73,6 +75,8 @@ for (const width of [390, 1440]) {
         const want = n.fontSize * 1.15;
         if (n.lineHeight === 'normal' || Math.abs(n.lineHeight - want) > 0.5)
           problems.push(`${role}: line-height ${n.lineHeight} vs §5.4 ${want.toFixed(2)}px (OQ-2)`);
+      } else if (sizeExempt) {
+        // line-height is 1 × font-size, so it follows the exempt size
       } else if (n.lineHeight === 'normal' || l.lineHeight === 'normal') {
         if (n.lineHeight !== l.lineHeight) problems.push(`${role}: line-height ${n.lineHeight} vs legacy ${l.lineHeight}`);
       } else if (Math.abs(n.lineHeight - l.lineHeight) > 0.5) {
@@ -140,7 +144,7 @@ test('M-01: no typeface other than Bodoni Moda / Instrument Sans on any text ele
 const clamp = (min: number, vw: number, max: number, w: number) => Math.min(max, Math.max(min, (vw * w) / 100));
 type Spec = { sel: string; fam: 'Bodoni' | 'Instrument'; size: (w: number) => number; weight?: string; style?: string; lh?: number; ls?: number };
 const SPECS: Record<string, Spec> = {
-  'Wordmark nav': { sel: 'header .wordmark__name', fam: 'Bodoni', size: () => 28, weight: '600', style: 'italic', lh: 1, ls: -0.01 },
+  'Wordmark nav': { sel: 'header .wordmark__name', fam: 'Bodoni', size: (w) => (w < 640 ? 24 : 28), weight: '600', style: 'italic', lh: 1, ls: -0.01 },
   'Wordmark footer': { sel: 'footer .wordmark__name', fam: 'Bodoni', size: () => 24, weight: '600', style: 'italic', lh: 1, ls: -0.01 },
   'Eyebrow': { sel: '#paths .t-eyebrow', fam: 'Instrument', size: () => 12, weight: '600', ls: 0.22 },
   'H1': { sel: 'h1', fam: 'Bodoni', size: (w) => clamp(48, 6.2, 89.6, w), weight: '500', style: 'normal', lh: 0.98, ls: -0.025 },

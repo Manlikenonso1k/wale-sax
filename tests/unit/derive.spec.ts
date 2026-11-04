@@ -63,7 +63,7 @@ for (const fmt of formatCombos) {
       ];
       expect(cards.map((c) => c.title)).toEqual(expectTitles);
       const home = cards.find((c) => c.key === 'home');
-      if (home) expect(home.body).toBe('Wale comes to your home, anywhere in Lagos. One-on-one.');
+      if (home) expect(home.body).toBe('Kent comes to your home, anywhere in Lagos. One-on-one.');
       for (const c of cards) expect(c.price).toBe('Ask for a price on WhatsApp');
 
       // Coverage lessons paragraph only when home
@@ -85,7 +85,7 @@ for (const fmt of formatCombos) {
         expect(youngCard.body).toBe(young.minAge != null ? `${base} From age ${young.minAge}.` : base);
       }
       const lessonsCard = pathsCards(s)[1];
-      expect(lessonsCard.body.includes('young learners and')).toBe(young.enabled);
+      expect(lessonsCard.body.includes('Youths, ')).toBe(young.enabled);
 
       const faqL = faqItems(s).find((g) => g.id === 'lessons')!.items;
       const age = faqL.find((i) => i.q === F.lessons.age.q);
@@ -99,7 +99,7 @@ for (const fmt of formatCombos) {
 test('Q6 lessons: lessonLength and price fill the format cards and FAQ', () => {
   const s = make({ home: true, online: true, lessonLength: '60 minutes', price: '₦40,000 / month · 4 lessons' });
   const cards = lessonFormats(s);
-  expect(cards[0].body).toBe('Wale comes to your home, anywhere in Lagos. One-on-one, 60 minutes per lesson.');
+  expect(cards[0].body).toBe('Kent comes to your home, anywhere in Lagos. One-on-one, 60 minutes per lesson.');
   for (const c of cards) expect(c.price).toBe('₦40,000 / month · 4 lessons');
   const often = faqItems(s).find((g) => g.id === 'lessons')!.items.find((i) => i.q === F.lessons.often.q)!;
   expect(often.a).toBe(`${F.lessons.often.a} Lessons are ₦40,000 / month · 4 lessons.`);
@@ -108,14 +108,14 @@ test('Q6 lessons: lessonLength and price fill the format cards and FAQ', () => {
 });
 
 test('Q6 lessons: trial microcopy', () => {
-  expect(lessonsMicrocopy(make({ trial: null }))).toBe('Send your level and area on WhatsApp — Wale will suggest a plan.');
+  expect(lessonsMicrocopy(make({ trial: null }))).toBe('Send your level and area on WhatsApp — Kent will suggest a plan.');
   expect(lessonsMicrocopy(make({ trial: 'First lesson free' }))).toBe('First lesson free · Send your level and area on WhatsApp.');
 });
 
 test('Q6 lessons: advisesOnInstruments switches the “own saxophone” answer', () => {
   const ownA = (v: boolean) =>
     faqItems(make({ advisesOnInstruments: v })).find((g) => g.id === 'lessons')!.items.find((i) => i.q === F.lessons.own.q)!.a;
-  expect(ownA(true)).toBe('You’ll need one to practise between lessons. If you don’t have one yet, ask Wale before you buy — he’ll tell you what to look for.');
+  expect(ownA(true)).toBe('You’ll need one to practise between lessons. If you don’t have one yet, ask Kent before you buy — he’ll tell you what to look for.');
   expect(ownA(false)).toBe('You’ll need one to practise between lessons.');
 });
 
@@ -143,8 +143,8 @@ test('Q6 gallery: 1–40 items, counter, video behaviour', () => {
   const many = Array.from({ length: 41 }, (_, i) => ({ ...site.gallery[1], id: `x${i}` }));
   expect(() => galleryItems({ ...site, gallery: many })).toThrow();
   expect(galleryItems({ ...site, gallery: many.slice(0, 40) })).toHaveLength(40);
-  expect(galleryCounter(site, 1)).toBe('02 / 32');
-  const v = site.gallery[0];
+  expect(galleryCounter(site, 1)).toBe(`02 / ${site.gallery.length}`);
+  const v = { ...site.gallery[0], videoSrc: null, externalUrl: null };
   expect(isPlayableVideo(v)).toBe(false); // neither videoSrc nor externalUrl → behaves like a photo
   expect(isPlayableVideo({ ...v, videoSrc: '/videos/x.mp4' })).toBe(true);
   expect(videoAction({ ...v, externalUrl: 'https://www.instagram.com/p/abc' })).toBe('instagram');

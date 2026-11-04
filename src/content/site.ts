@@ -2,11 +2,11 @@
  * ALL copy, links, prices, flags and gallery items for the site (M-10).
  *
  * Editing guide (plain language):
- * - Text in [BRACKETS] is a placeholder that only Wale can fill in. Replace the whole
+ * - Text in [BRACKETS] is a placeholder that only Kent can fill in. Replace the whole
  *   bracketed text, including the brackets, when you have the real words.
  * - Words wrapped in *asterisks* inside a heading show as italic brass.
  * - `null` means “not known yet”: the element hides or shows a safe fallback.
- * - Fields marked CONFIRM are best guesses. Check them with Wale before launch.
+ * - Fields marked CONFIRM are best guesses. Check them with Kent before launch.
  * - Use typographic apostrophes and quotes (’ “ ”) in all copy.
  */
 
@@ -27,8 +27,10 @@ export type ContactKind = 'booking' | 'lessons' | 'general';
 
 export const site = {
   siteUrl: 'https://YOUR-DOMAIN.com', // CONFIRM before launch (used for canonical/OG/sitemap)
-  name: 'Wale',
-  fullName: null as string | null, // e.g. 'Wale Adebayo' — shown in footer/JSON-LD if set
+  name: 'Kent',
+  /** Brand shown in the wordmark, footer and page title (matches the social handles). */
+  brand: { name: 'Music by Kent', short: 'MBK', emoji: '🎷' },
+  fullName: null as string | null, // e.g. 'Kent Adebayo' — shown in footer/JSON-LD if set
   role: 'Saxophonist',
   base: 'Ajah, Lagos',
   whatsapp: { number: '2347040149133', display: '0704 014 9133' },
@@ -56,36 +58,43 @@ export const site = {
     advisesOnInstruments: true, // CONFIRM: will tell students what sax to buy
   },
   areas: ['Ajah', 'Lekki', 'Sangotedo', 'Ibeju-Lekki', 'Victoria Island', 'Ikoyi', 'Yaba', 'Surulere', 'Ikeja', 'Magodo', 'Festac'],
-  audioSample: null as string | null, // e.g. '/audio/wale-sample.mp3' → enables the “Hear a phrase” button
+  audioSample: null as string | null, // e.g. '/audio/kent-sample.mp3' → enables the “Hear a phrase” button
   gallery: [
-    { id: 'live-video', kind: 'video', image: 'gal-video.jpg', alt: 'Wale performing live', caption: 'Live set', videoSrc: null, externalUrl: null },
-    { id: 'live-1', kind: 'photo', image: 'EFIZ1638.jpg', alt: 'Wale holding his saxophone in a dark studio portrait', caption: 'Studio portrait' },
-    { id: 'live-2', kind: 'photo', image: 'EFIZ1639.jpg', alt: 'Wale performing with his saxophone under stage lighting', caption: 'On stage' },
-    { id: 'live-3', kind: 'photo', image: 'EFIZ1647.jpg', alt: 'Wale with his saxophone in a red-lit portrait', caption: 'Saxophone portrait' },
-    { id: 'live-4', kind: 'photo', image: 'EFIZ1654.jpg', alt: 'Wale seated with his saxophone', caption: 'Between sets' },
-    { id: 'live-5', kind: 'photo', image: 'EFIZ1656.jpg', alt: 'Wale holding his saxophone in a dark studio portrait', caption: 'Studio portrait' },
-    { id: 'live-6', kind: 'photo', image: 'EFIZ1659.jpg', alt: 'Wale holding a red flower beside his saxophone', caption: 'Portrait' },
-    { id: 'live-7', kind: 'photo', image: 'wedding.jpeg', alt: 'Wale playing saxophone at a wedding celebration', caption: 'Wedding performance' },
-    { id: 'live-8', kind: 'photo', image: 'EFIZ1562 3.JPG', alt: 'Wale dressed for a performance', caption: 'Ready for the occasion' },
-    { id: 'live-9', kind: 'photo', image: 'EFIZ1565.jpg', alt: 'Wale in a black suit', caption: 'Portrait' },
-    { id: 'live-10', kind: 'photo', image: 'EFIZ1565 2.jpg', alt: 'Wale in a black suit', caption: 'Portrait' },
-    { id: 'live-11', kind: 'photo', image: 'EFIZ1565 3.jpg', alt: 'Wale in a black suit', caption: 'Portrait' },
-    { id: 'live-12', kind: 'photo', image: 'EFIZ1575.jpg', alt: 'Wale in a grey suit', caption: 'Portrait' },
-    { id: 'live-13', kind: 'photo', image: 'EFIZ1575 2.jpg', alt: 'Wale in a grey suit', caption: 'Portrait' },
-    { id: 'live-14', kind: 'photo', image: 'EFIZ1575 3.jpg', alt: 'Wale in a grey suit', caption: 'Portrait' },
-    { id: 'live-15', kind: 'photo', image: 'EFIZ1577.jpg', alt: 'Wale in a black suit', caption: 'Portrait' },
-    { id: 'live-16', kind: 'photo', image: 'EFIZ1577 2.jpg', alt: 'Wale in a black suit', caption: 'Portrait' },
-    { id: 'live-17', kind: 'photo', image: 'EFIZ1577 3.jpg', alt: 'Wale in a black suit', caption: 'Portrait' },
-    { id: 'live-18', kind: 'photo', image: 'EFIZ1585 2.jpg', alt: 'Wale seated in a chair', caption: 'Portrait' },
-    { id: 'live-19', kind: 'photo', image: 'EFIZ1585 3.jpg', alt: 'Wale seated in a chair', caption: 'Portrait' },
-    { id: 'live-20', kind: 'photo', image: 'EFIZ1595.jpg', alt: 'Wale seated with his saxophone', caption: 'Portrait' },
-    { id: 'live-21', kind: 'photo', image: 'EFIZ1595 2.jpg', alt: 'Wale seated with his saxophone', caption: 'Portrait' },
-    { id: 'live-22', kind: 'photo', image: 'EFIZ1595 3.jpg', alt: 'Wale seated with his saxophone', caption: 'Portrait' },
-    { id: 'live-23', kind: 'photo', image: 'EFIZ1596.jpg', alt: 'Wale seated with his saxophone', caption: 'Portrait' },
-    { id: 'live-24', kind: 'photo', image: 'EFIZ1596 2.jpg', alt: 'Wale seated with his saxophone', caption: 'Portrait' },
-    { id: 'live-25', kind: 'photo', image: 'EFIZ1639 3.jpg', alt: 'Wale performing with his saxophone under stage lighting', caption: 'On stage' },
-    { id: 'live-26', kind: 'photo', image: 'EFIZ1647 2.jpg', alt: 'Wale holding his saxophone in a red-lit portrait', caption: 'Saxophone portrait' },
-    { id: 'live-27', kind: 'photo', image: 'EFIZ1647 3.jpg', alt: 'Wale holding his saxophone in a red-lit portrait', caption: 'Saxophone portrait' },
+    { id: 'live-video', kind: 'video', image: 'poster-event-performance.jpg', alt: 'Kent playing saxophone as he walks through guests at an event hall', caption: 'Performing at an event', videoSrc: '/videos/event-performance.mp4', externalUrl: null },
+    { id: 'lesson-video-1', kind: 'video', image: 'poster-lesson-whiteboard.jpg', alt: 'Kent explaining saxophone notes on a whiteboard during a class', caption: 'Saxophone class', videoSrc: '/videos/lesson-whiteboard.mp4', externalUrl: null },
+    { id: 'lesson-video-2', kind: 'video', image: 'poster-class-tenstrings.jpg', alt: 'Kent playing saxophone beside a student in a music studio', caption: 'Class at Tenstrings headquarters', videoSrc: '/videos/class-tenstrings.mp4', externalUrl: null },
+    { id: 'lesson-video-3', kind: 'video', image: 'poster-lesson-studio.jpg', alt: 'Kent demonstrating on the saxophone in a studio with guitars on the wall', caption: 'Lesson demo', videoSrc: '/videos/lesson-studio.mp4', externalUrl: null },
+    { id: 'lesson-video-4', kind: 'video', image: 'poster-lesson-student.jpg', alt: 'Kent coaching a seated student in a music studio', caption: 'One-on-one lesson', videoSrc: '/videos/lesson-student.mp4', externalUrl: null },
+    { id: 'lesson-video-5', kind: 'video', image: 'poster-lesson-divine.jpg', alt: 'A young student, Divine, practising the saxophone outdoors', caption: 'Lessons with Divine (student)', videoSrc: '/videos/lesson-divine.mp4', externalUrl: null },
+    { id: 'event-photo-1', kind: 'photo', image: 'birthday-surprise.jpeg', alt: 'Kent playing saxophone for a birthday celebrant as guests film on their phones', caption: 'Birthday surprise' },
+    { id: 'event-photo-2', kind: 'photo', image: 'dinner-lounge.jpeg', alt: 'Kent holding his saxophone at a dinner event', caption: 'Dinner event' },
+    { id: 'live-1', kind: 'photo', image: 'EFIZ1638.jpg', alt: 'Kent holding his saxophone in a dark studio portrait', caption: 'Studio portrait' },
+    { id: 'live-2', kind: 'photo', image: 'EFIZ1639.jpg', alt: 'Kent performing with his saxophone under stage lighting', caption: 'On stage' },
+    { id: 'live-3', kind: 'photo', image: 'EFIZ1647.jpg', alt: 'Kent with his saxophone in a red-lit portrait', caption: 'Saxophone portrait' },
+    { id: 'live-4', kind: 'photo', image: 'EFIZ1654.jpg', alt: 'Kent seated with his saxophone', caption: 'Between sets' },
+    { id: 'live-5', kind: 'photo', image: 'EFIZ1656.jpg', alt: 'Kent holding his saxophone in a dark studio portrait', caption: 'Studio portrait' },
+    { id: 'live-6', kind: 'photo', image: 'EFIZ1659.jpg', alt: 'Kent holding a red flower beside his saxophone', caption: 'Portrait' },
+    { id: 'live-7', kind: 'photo', image: 'wedding.jpeg', alt: 'Kent playing saxophone at a wedding celebration', caption: 'Wedding performance' },
+    { id: 'live-8', kind: 'photo', image: 'EFIZ1562 3.JPG', alt: 'Kent dressed for a performance', caption: 'Ready for the occasion' },
+    { id: 'live-9', kind: 'photo', image: 'EFIZ1565.jpg', alt: 'Kent in a black suit', caption: 'Portrait' },
+    { id: 'live-10', kind: 'photo', image: 'EFIZ1565 2.jpg', alt: 'Kent in a black suit', caption: 'Portrait' },
+    { id: 'live-11', kind: 'photo', image: 'EFIZ1565 3.jpg', alt: 'Kent in a black suit', caption: 'Portrait' },
+    { id: 'live-12', kind: 'photo', image: 'EFIZ1575.jpg', alt: 'Kent in a grey suit', caption: 'Portrait' },
+    { id: 'live-13', kind: 'photo', image: 'EFIZ1575 2.jpg', alt: 'Kent in a grey suit', caption: 'Portrait' },
+    { id: 'live-14', kind: 'photo', image: 'EFIZ1575 3.jpg', alt: 'Kent in a grey suit', caption: 'Portrait' },
+    { id: 'live-15', kind: 'photo', image: 'EFIZ1577.jpg', alt: 'Kent in a black suit', caption: 'Portrait' },
+    { id: 'live-16', kind: 'photo', image: 'EFIZ1577 2.jpg', alt: 'Kent in a black suit', caption: 'Portrait' },
+    { id: 'live-17', kind: 'photo', image: 'EFIZ1577 3.jpg', alt: 'Kent in a black suit', caption: 'Portrait' },
+    { id: 'live-18', kind: 'photo', image: 'EFIZ1585 2.jpg', alt: 'Kent seated in a chair', caption: 'Portrait' },
+    { id: 'live-19', kind: 'photo', image: 'EFIZ1585 3.jpg', alt: 'Kent seated in a chair', caption: 'Portrait' },
+    { id: 'live-20', kind: 'photo', image: 'EFIZ1595.jpg', alt: 'Kent seated with his saxophone', caption: 'Portrait' },
+    { id: 'live-21', kind: 'photo', image: 'EFIZ1595 2.jpg', alt: 'Kent seated with his saxophone', caption: 'Portrait' },
+    { id: 'live-22', kind: 'photo', image: 'EFIZ1595 3.jpg', alt: 'Kent seated with his saxophone', caption: 'Portrait' },
+    { id: 'live-23', kind: 'photo', image: 'EFIZ1596.jpg', alt: 'Kent seated with his saxophone', caption: 'Portrait' },
+    { id: 'live-24', kind: 'photo', image: 'EFIZ1596 2.jpg', alt: 'Kent seated with his saxophone', caption: 'Portrait' },
+    { id: 'live-25', kind: 'photo', image: 'EFIZ1639 3.jpg', alt: 'Kent performing with his saxophone under stage lighting', caption: 'On stage' },
+    { id: 'live-26', kind: 'photo', image: 'EFIZ1647 2.jpg', alt: 'Kent holding his saxophone in a red-lit portrait', caption: 'Saxophone portrait' },
+    { id: 'live-27', kind: 'photo', image: 'EFIZ1647 3.jpg', alt: 'Kent holding his saxophone in a red-lit portrait', caption: 'Saxophone portrait' },
     { id: 'live-28', kind: 'photo', image: 'IMG_0671.jpg', alt: 'A decorated room set up for a celebration', caption: 'A celebration setup' },
     { id: 'live-29', kind: 'photo', image: 'birthday.jpg', alt: 'A birthday celebration at home', caption: 'Birthday celebration' },
     { id: 'live-30', kind: 'photo', image: 'propsal.jpg', alt: 'A decorated room prepared for a proposal', caption: 'Proposal setup' },
@@ -94,10 +103,10 @@ export const site = {
 
   // ─── SEO ──────────────────────────────────────────────────────────────
   seo: {
-    title: 'Wale | Saxophonist for Hire & Saxophone Lessons in Lagos',
+    title: 'Music by Kent (MBK) 🎷 | Live Saxophonist & Music Lessons in Lagos',
     description:
-      'Book Wale, a live saxophonist based in Ajah, for weddings, birthdays and events anywhere in Lagos, or learn the sax with one-on-one lessons at home.',
-    services: ['Live saxophone performance', 'Saxophone lessons'],
+      'Book Kent, a live saxophonist in Ajah, for weddings, birthdays and events anywhere in Lagos, or take one-on-one piano, guitar and saxophone lessons at home.',
+    services: ['Live saxophone performance', 'Piano, guitar and saxophone lessons'],
     city: 'Lagos',
     locality: 'Ajah',
     region: 'Lagos',
@@ -124,12 +133,12 @@ export const site = {
       { label: 'Gallery', href: '#gallery' },
       { label: 'FAQ', href: '#faq' },
     ],
-    cta: 'Message Wale',
+    cta: 'Message Kent',
   },
   widget: {
-    ariaLabel: 'Chat with Wale on WhatsApp',
-    chip: 'Chat with Wale',
-    title: 'Wale · Saxophonist',
+    ariaLabel: 'Chat with Kent on WhatsApp',
+    chip: 'Chat with Kent',
+    title: 'Kent · Saxophonist',
     status: 'Replies on WhatsApp',
   },
   contactOptions: [
@@ -138,7 +147,7 @@ export const site = {
     { kind: 'general', label: 'Just a question' },
   ] as { kind: ContactKind; label: string }[],
   footer: {
-    tagline: 'Live saxophonist & teacher · Ajah, Lagos · Plays and teaches anywhere in Lagos',
+    tagline: 'Live saxophonist & instructor · Ajah, Lagos · Plays and teaches anywhere in Lagos',
     whatsappLabel: 'WhatsApp · 0704 014 9133',
     instagramLabel: 'Instagram',
     instagramPlaceholder: '[@handle]',
@@ -147,16 +156,16 @@ export const site = {
 
   // ─── Hero (§6.4) ──────────────────────────────────────────────────────
   hero: {
-    eyebrow: 'Live saxophonist & teacher · Ajah, Lagos',
+    eyebrow: 'Live saxophonist & instructor · Ajah, Lagos',
     h1Words: ['Live', 'saxophone,', 'delivered', 'to', 'your', 'door.'],
     h1EmphasisIndex: 2,
-    lead: 'Book Wale to play your wedding, birthday or dinner — or learn to play yourself, with one-on-one lessons at home. Anywhere in Lagos.',
-    primaryCta: 'Book Wale for your event',
+    lead: 'Book Kent to play your wedding, birthday or dinner — or learn to play yourself, with one-on-one lessons at home. Anywhere in Lagos.',
+    primaryCta: 'Book Kent for your event',
     secondaryCta: 'Start saxophone lessons',
     microcopy: 'Both start with one WhatsApp message.',
     image: {
-      file: 'wale-hero.jpg',
-      alt: 'Wale in a black pinstripe suit and coral bow tie, holding a gold alto saxophone',
+      file: 'kent-hero.jpg',
+      alt: 'Kent in a black pinstripe suit and coral bow tie, holding a gold alto saxophone',
     },
     hearPhrase: 'Hear a phrase',
     stop: 'Stop',
@@ -170,7 +179,7 @@ export const site = {
       {
         label: '01 · Performances',
         title: 'Hear him live',
-        body: 'Weddings, birthdays, proposals, dinners and church events. He arrives suited, plays your moments on cue, and leaves your guests talking.',
+        body: 'Weddings, Birthdays, Proposals, Dinners, Church Events and Live Band Performances.',
         bodyNoYoung: null as string | null,
         link: 'Explore performances',
         href: '#performances',
@@ -178,9 +187,9 @@ export const site = {
       {
         label: '02 · Lessons',
         title: 'Learn to play',
-        body: 'One-on-one saxophone lessons in your own living room — for complete beginners, young learners and church instrumentalists.',
-        // Used when lessons.youngLearners.enabled is false (drops “young learners and”).
-        bodyNoYoung: 'One-on-one saxophone lessons in your own living room — for complete beginners, church instrumentalists.' as string | null,
+        body: 'Enjoy Personalized, One-on-One Music Lessons in the Comfort of Your Home! Piano, Guitar & Saxophone Lessons for Beginners, Intermediate Learners, Youths, Adults, and Church Instrumental Groups.',
+        // Used when lessons.youngLearners.enabled is false (drops “Youths”).
+        bodyNoYoung: 'Enjoy Personalized, One-on-One Music Lessons in the Comfort of Your Home! Piano, Guitar & Saxophone Lessons for Beginners, Intermediate Learners, Adults, and Church Instrumental Groups.' as string | null,
         link: 'Explore lessons',
         href: '#lessons',
       },
@@ -210,16 +219,16 @@ export const site = {
     eyebrow: 'Occasions',
     heading: 'Wherever there’s something to celebrate.',
     cards: [
-      { image: 'wedding.jpeg', title: 'Weddings.', body: 'The walk down the aisle, the grand entrance, the first dance — live, and timed to the second.', alt: 'Wale playing saxophone at a wedding celebration' },
-      { image: 'birthday.jpg', title: 'Birthdays & surprises.', body: 'He walks in playing their favourite song. You get to watch their face.', alt: 'A birthday celebration at home' },
+      { image: 'wedding.jpeg', title: 'Weddings.', body: 'The walk down the aisle, the grand entrance, the first dance — live, and timed to the second.', alt: 'Kent playing saxophone at a wedding celebration' },
+      { image: 'birthday-surprise.jpeg', title: 'Birthdays & surprises.', body: 'He walks in playing their favourite song. You get to watch their face.', alt: 'Kent playing saxophone for a birthday celebrant as guests film on their phones' },
       { image: 'propsal.jpg', title: 'Proposals & anniversaries.', body: 'A private serenade at home or over dinner, for the question that matters most.', alt: 'A decorated room prepared for a proposal' },
-      { image: 'dinning.jpg', title: 'Dinners, launches & lounges.', body: 'Smooth live jazz that keeps guests at the table — for corporate nights, restaurants and beach clubs.', alt: 'A dining table prepared for an event' },
+      { image: 'dinner-lounge.jpeg', title: 'Dinners, launches & lounges.', body: 'Smooth live jazz that keeps guests at the table — for corporate nights, restaurants and beach clubs.', alt: 'Kent holding his saxophone at a dinner event' },
     ],
     footer: 'Also thanksgiving services, naming ceremonies, graduations, house parties and album launches. If there are guests, he can play it.',
     cta: 'Ask about your event',
   },
   pullQuote: {
-    quote: '“[A client’s words about the moment Wale walked in — ask a happy client for two sentences and paste them here.]”',
+    quote: '“[A client’s words about the moment Kent walked in — ask a happy client for two sentences and paste them here.]”',
     caption: '[Client name] · [Occasion], [Area]',
     placeholder: true,
   },
@@ -238,7 +247,7 @@ export const site = {
     eyebrow: 'Kind words',
     heading: 'What hosts say after the night.',
     cards: [
-      { quote: '“[Before Wale: what they were worried about. After: what their guests said when he started playing.]”', name: '[Client name]', meta: '[Wedding · Lekki]', placeholder: true },
+      { quote: '“[Before Kent: what they were worried about. After: what their guests said when he started playing.]”', name: '[Client name]', meta: '[Wedding · Lekki]', placeholder: true },
       { quote: '“[The surprise moment: who it was for, how they reacted, what it meant.]”', name: '[Client name]', meta: '[Birthday · Ikoyi]', placeholder: true },
       { quote: '“[Why they would book him again, or who they have already recommended him to.]”', name: '[Client name]', meta: '[Corporate dinner · Victoria Island]', placeholder: true },
     ],
@@ -249,12 +258,12 @@ export const site = {
     eyebrow: 'Home delivery',
     heading: 'Based in Ajah. *Plays\u00A0— and teaches —\u00A0anywhere.*', // D-018
     body: 'You don’t go to the music — the music comes to you. Your living room, your rooftop, the church hall, the hotel ballroom.',
-    lessonsBody: 'Lessons work the same way: Wale comes to your home, so Lagos traffic never stands between you and your practice.',
+    lessonsBody: 'Lessons work the same way: Kent comes to your home, so Lagos traffic never stands between you and your practice.',
     moreChip: '…and everywhere in between',
     note: 'Outside Lagos? Send the location and ask.',
     mapCaption: 'Stylised map — not to scale.',
     baseLabel: 'Base',
-    areasLabel: 'Areas Wale plays and teaches',
+    areasLabel: 'Areas Kent plays and teaches',
   },
 
   // ─── Chapter II — Lessons (§6.8) ──────────────────────────────────────
@@ -266,15 +275,15 @@ export const site = {
     leadBoth: 'One-on-one lessons at your home in Lagos, or by video call.',
     cta: 'Book a trial lesson',
     microTrial: '{trial} · Send your level and area on WhatsApp.',
-    microDefault: 'Send your level and area on WhatsApp — Wale will suggest a plan.',
-    image: { file: 'wale-sax-detail.jpg', alt: 'Close-up of Wale’s hands on the bell of his gold saxophone' },
+    microDefault: 'Send your level and area on WhatsApp — Kent will suggest a plan.',
+    image: { file: 'kent-sax-detail.jpg', alt: 'Close-up of Kent’s hands on the bell of his gold saxophone' },
   },
   lessonsPas: {
     eyebrow: 'Sound familiar?',
     heading: 'The saxophone isn’t hard. *Learning\u00A0it alone is.*', // D-018
     p1: 'You’ve wanted to play for years. Maybe there’s a saxophone in your house right now, sitting in its case.',
     p2: 'So you try YouTube. You get a squeak, a sore lip and a lot of frustration — and nobody there to tell you why. The wrong habit sets in, progress stops, and the case closes for another year.',
-    p3: 'Lessons with Wale fix that from the first session. He sits beside you, hears every note and corrects it on the spot. Then he teaches you the songs you actually want to play — not just exercises.',
+    p3: 'Lessons with Kent fix that from the first session. He sits beside you, hears every note and corrects it on the spot. Then he teaches you the songs you actually want to play — not just exercises.',
   },
   lessonsWho: {
     eyebrow: 'Who it’s for',
@@ -302,13 +311,13 @@ export const site = {
     eyebrow: 'Lesson formats',
     heading: 'Lessons that *come to you.*',
     cards: {
-      home: { title: 'Home lessons', body: 'Wale comes to your home, anywhere in Lagos. One-on-one{length}.' },
-      online: { title: 'Online lessons', body: 'Live video lessons from wherever you are. Same teacher, same feedback.' },
+      home: { title: 'Home lessons', body: 'Kent comes to your home, anywhere in Lagos. One-on-one{length}.' },
+      online: { title: 'Online lessons', body: 'Live video lessons from wherever you are. Same instructor, same feedback.' },
       group: { title: 'Learn together', body: 'Siblings, friends or a church band learning side by side.' },
     },
     lengthSuffix: ', {lessonLength} per lesson',
     priceFallback: 'Ask for a price on WhatsApp',
-    instrumentNote: 'No saxophone yet? Ask Wale before you buy — a bad beginner instrument makes everything harder.',
+    instrumentNote: 'No saxophone yet? Ask Kent before you buy — a bad beginner instrument makes everything harder.',
     cta: 'Book a trial lesson',
   },
   students: {
@@ -368,17 +377,17 @@ export const site = {
       },
       own: {
         q: 'Do I need my own saxophone?',
-        advises: 'You’ll need one to practise between lessons. If you don’t have one yet, ask Wale before you buy — he’ll tell you what to look for.',
+        advises: 'You’ll need one to practise between lessons. If you don’t have one yet, ask Kent before you buy — he’ll tell you what to look for.',
         plain: 'You’ll need one to practise between lessons.',
       },
       age: {
         q: 'How old do you have to be?',
         withMinAge: 'Lessons are for adults and young learners from age {minAge}.',
-        noMinAge: 'Adults and young learners are both welcome — send the student’s age on WhatsApp and Wale will tell you if it’s a good time to start.',
+        noMinAge: 'Adults and young learners are both welcome — send the student’s age on WhatsApp and Kent will tell you if it’s a good time to start.',
       },
       often: {
         q: 'How often are lessons, and how much?',
-        a: 'Send your level, area and preferred days on WhatsApp, and Wale will suggest a schedule and price.',
+        a: 'Send your level, area and preferred days on WhatsApp, and Kent will suggest a schedule and price.',
         withPrice: ' Lessons are {price}.',
       },
       genres: {
@@ -393,7 +402,7 @@ export const site = {
     eyebrow: 'Your move',
     heading: 'Hear him live, or learn to play. *Either way, he comes to you.*',
     body: 'One saxophonist, one event a night — and only so many lesson slots in a week. If your date or your start matters, send the message now.',
-    cta1: 'Check Wale’s availability',
+    cta1: 'Check Kent’s availability',
     cta2: 'Book a trial lesson',
     callPrefix: 'Prefer to call?',
   },
@@ -409,7 +418,7 @@ export const site = {
   // ─── Booking and Lessons consoles (§9.2, §9.3) ────────────────────────
   consoles: {
     booking: {
-      title: 'Book Wale',
+      title: 'Book Kent',
       subtitle: 'Answer a few quick questions — your WhatsApp message writes itself.',
       occasionLegend: 'Occasion',
       occasions: ['Wedding', 'Birthday or surprise', 'Proposal or anniversary', 'Dinner or corporate event', 'Church or thanksgiving', 'Something else'],
@@ -427,7 +436,7 @@ export const site = {
     },
     lessons: {
       title: 'Start lessons',
-      subtitle: 'Tell Wale where you’re starting — he’ll suggest a plan.',
+      subtitle: 'Tell Kent where you’re starting — he’ll suggest a plan.',
       whoLegend: 'Who’s learning?',
       who: ['Me', 'My child', 'Someone else'],
       /** Which “who” answers show the Age field (index into `who`). */
@@ -455,10 +464,10 @@ export const site = {
 
   // ─── WhatsApp message templates (§9.6, OQ-7) ──────────────────────────
   messages: {
-    bookingIntro: 'Hi Wale, I found your website and I’d like to book you.',
+    bookingIntro: 'Hi Kent, I found your website and I’d like to book you.',
     bookingLabels: { occasion: 'Occasion', date: 'Date', location: 'Location', guests: 'Guests' },
     dateNotFixed: 'Not fixed yet',
-    lessonsIntro: 'Hi Wale, I found your website and I’d like saxophone lessons.',
+    lessonsIntro: 'Hi Kent, I found your website and I’d like saxophone lessons.',
     lessonsLabels: {
       who: 'Who’s learning',
       age: ' (age {age})',
@@ -467,7 +476,7 @@ export const site = {
       area: 'Area',
       days: 'Preferred days',
     },
-    generalIntro: 'Hi Wale, I found your website and I have a question:',
+    generalIntro: 'Hi Kent, I found your website and I have a question:',
   },
 };
 

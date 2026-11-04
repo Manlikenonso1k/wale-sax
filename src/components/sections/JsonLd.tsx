@@ -2,7 +2,7 @@ import { site } from '@/content/site';
 
 /** JSON-LD @graph: one Person + two Services. No ratings or reviews (M-09). */
 export function JsonLd() {
-  const id = `${site.siteUrl}/#wale`;
+  const id = `${site.siteUrl}/#kent`;
   const sameAs = site.instagram.url ? [site.instagram.url] : undefined;
   const data = {
     '@context': 'https://schema.org',
@@ -11,6 +11,7 @@ export function JsonLd() {
         '@type': 'Person',
         '@id': id,
         name: site.fullName ?? site.name,
+        alternateName: `${site.brand.name} (${site.brand.short})`,
         jobTitle: site.role,
         image: `${site.siteUrl}/images/${site.hero.image.file}`,
         telephone: `+${site.whatsapp.number}`,

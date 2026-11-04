@@ -1,10 +1,10 @@
 /**
  * Motion preference store (§10.4): OS `prefers-reduced-motion` combined with the
- * user's Motion toggle (localStorage `wale-motion`). Read with useSyncExternalStore.
+ * user's Motion toggle (localStorage `kent-motion`). Read with useSyncExternalStore.
  */
 import { useSyncExternalStore } from 'react';
 
-const KEY = 'wale-motion';
+const KEY = 'kent-motion';
 type Pref = 'on' | 'off' | null;
 
 const listeners = new Set<() => void>();

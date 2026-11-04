@@ -8,7 +8,7 @@ import { NavController } from './NavController';
 
 /**
  * Sticky nav (§6.3, §7.18). Without JS the Menu link opens a CSS (:target) panel;
- * with JS (overlays ready) it opens the Mobile Sheet. “Message Wale” opens the Contact Menu.
+ * with JS (overlays ready) it opens the Mobile Sheet. “Message Kent” opens the Contact Menu.
  */
 export function Nav() {
   return (

@@ -46,13 +46,13 @@ test('Q26: JSON-LD parses; one Person + two Service; no AggregateRating/Review',
   expect(persons).toHaveLength(1);
   expect(services).toHaveLength(2);
   const p = persons[0] as Record<string, unknown>;
-  expect(p['@id']).toBe(`${site.siteUrl}/#wale`);
+  expect(p['@id']).toBe(`${site.siteUrl}/#kent`);
   expect(p.jobTitle).toBe('Saxophonist');
   expect(p.telephone).toBe('+2347040149133');
   expect(JSON.stringify(p.address)).toContain('Ajah');
-  expect(services.map((s) => s.name).sort()).toEqual(['Live saxophone performance', 'Saxophone lessons']);
+  expect(services.map((s) => s.name).sort()).toEqual(['Live saxophone performance', 'Piano, guitar and saxophone lessons']);
   for (const s of services) {
-    expect((s.provider as Record<string, string>)['@id']).toBe(`${site.siteUrl}/#wale`);
+    expect((s.provider as Record<string, string>)['@id']).toBe(`${site.siteUrl}/#kent`);
     expect(JSON.stringify(s.areaServed)).toContain('Lagos');
   }
   const raw = blocks[0];

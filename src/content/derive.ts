@@ -149,7 +149,7 @@ export function videoAction(item: GalleryItem): 'instagram' | 'youtube' | null {
   throw new Error(`site.ts: gallery item "${item.id}" externalUrl must be an Instagram or YouTube link.`);
 }
 
-/** Name shown in the footer: “Wale” plus the full name when set. */
+/** Name shown in the footer: “Kent” plus the full name when set. */
 export function footerName(s: Site): { name: string; fullName: string | null } {
   return { name: s.name, fullName: s.fullName };
 }

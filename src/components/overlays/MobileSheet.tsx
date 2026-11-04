@@ -7,7 +7,7 @@ import { scrollToTarget } from '@/lib/scroll-bus';
 import { MotionToggle } from '@/components/layout/MotionToggle';
 import { ModalShell } from './ModalShell';
 
-/** Mobile Sheet (§9.7): the four section links, Message Wale and the Motion toggle. */
+/** Mobile Sheet (§9.7): the four section links, Message Kent and the Motion toggle. */
 export function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
   const pending = useRef<string | null>(null);
 

@@ -31,7 +31,7 @@ const ig = instagramLink(site);
 /** Strings that must appear verbatim in the rendered DOM text. */
 const strings: string[] = [
   // Global
-  ...site.nav.links.map((l) => l.label), site.nav.cta, site.role,
+  ...site.nav.links.map((l) => l.label), site.nav.cta, site.brand.name, site.brand.short,
   site.widget.chip,
   site.footer.tagline, site.footer.whatsappLabel, `${site.footer.instagramLabel} · ${ig.handle}`, site.footer.copyright,
   // Hero

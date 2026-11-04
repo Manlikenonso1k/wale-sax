@@ -1,4 +1,4 @@
-# Wale "Brass Cosmos" rebuild: PLAN
+# Kent "Brass Cosmos" rebuild: PLAN
 
 Planner output for Phase 1. Source of truth for requirements: `docs/BUILD-PROMPT.md` (cited as §n). Decisions: `docs/DECISIONS.md` (D-nnn). Tests in §16.2 are cited as **Q1–Q29**; Lighthouse §16.3 is **LH**; the visual matrix §16.4 is **VIS**; the CI command chain §16.1 is **CI**; the bundle budget check defined in §8 of this plan is **BUD**.
 
@@ -21,7 +21,7 @@ Each has a proposed resolution. The Designer and QA follow the proposed resoluti
 | OQ-9 | **Lessons flags with no defined copy.** §6.8 defines the intro lead for `home` and/or `online` only. With `home: false, online: false` (group-only or nothing enabled) there is no launch-safe text, and writing one would be new copy (M-08). | §6.8, §6.1. | `derive.ts` throws at build time with a plain-English error ("site.ts: enable lessons.home or lessons.online") if both are false. A broken flag combination fails CI loudly instead of shipping invented copy. Q6 asserts the throw. |
 | OQ-10 | **Booking default template date line.** §9.6 says the default/no-JS version has "all values blank" but the template line is `Date: {date \| "Not fixed yet"}`. | §9.6. | Default/no-JS: `Date: ` (blank). In the console: blank when no date and the checkbox is unticked; formatted date when set; `Not fixed yet` only when "Date not fixed yet" is ticked. Q9 and Q28 assert all three. |
 | OQ-11 | **`prepare-deploy.mjs` placeholder count is not a reliable list.** Its regex caps at 80 characters (the pull-quote and testimonial placeholders are longer, e.g. the pull quote is ~107 characters) and it scans raw HTML, which also contains the RSC flight payload (duplicates). | §15.4 regex `\[[^\]<>]{1,80}\]`. | Keep the script verbatim (Q29 diffs it). Its count is informational only. Q27 extracts placeholders from the rendered DOM text (`document.body.innerText`, regex `/\[[^\]]+\]/g`, de-duplicated with counts) and compares with the README list. |
-| OQ-12 | **Widget/CTA element type after hydration.** §9.4 wants `aria-expanded` on the widget "button", and its no-JS form is an `<a>`. Swapping `<a>` for `<button>` on hydration causes a hydration mismatch. | §9.4, M-07, Q12. | Every CTA, the nav "Message Wale", and the widget stay `<a href="https://wa.me/…">` forever. JS adds `aria-haspopup="dialog"` and `aria-expanded`/`aria-controls` attributes (valid on `link` role) and intercepts plain left-clicks only (no modifier keys, `button === 0`). Middle-click or Cmd/Ctrl-click still opens WhatsApp. |
+| OQ-12 | **Widget/CTA element type after hydration.** §9.4 wants `aria-expanded` on the widget "button", and its no-JS form is an `<a>`. Swapping `<a>` for `<button>` on hydration causes a hydration mismatch. | §9.4, M-07, Q12. | Every CTA, the nav "Message Kent", and the widget stay `<a href="https://wa.me/…">` forever. JS adds `aria-haspopup="dialog"` and `aria-expanded`/`aria-controls` attributes (valid on `link` role) and intercepts plain left-clicks only (no modifier keys, `button === 0`). Middle-click or Cmd/Ctrl-click still opens WhatsApp. |
 | OQ-13 | **Video `externalUrl` button label.** §9.5 says "Watch on Instagram/YouTube" without saying which. | §9.5. | `derive.ts` `videoAction(item)`: host `instagram.com` → `site.lightbox.watchOnInstagram`, `youtube.com`/`youtu.be` → `site.lightbox.watchOnYouTube`; any other host throws at build ("externalUrl must be Instagram or YouTube"). |
 | OQ-14 | **Q28 runs with `TZ=America/Los_Angeles`**, which is shell syntax that does not work on Windows. | M-19 cross-platform rule. | The unit specs run in a browserless Playwright project `unit`; the date spec sets `process.env.TZ = 'America/Los_Angeles'` at the top of the file (Node re-reads TZ at runtime) and asserts `new Date().getTimezoneOffset()` is 420 or 480 before testing. |
 | OQ-15 | **Clean-clone `npm run typecheck` before `build` fails with the scaffold's `layout.tsx`**, which uses the generated global `LayoutProps<'/'>` type (it only exists after `next build` or `next typegen`). | `src/app/layout.tsx` in the scaffold. | Never use generated route-type globals. Type layout props explicitly (`{ children: React.ReactNode }`). Then `typecheck` passes before or after `build`. CI order (build → typecheck) is unchanged. |
@@ -76,7 +76,7 @@ deploy/htaccess-static                     §15.3 verbatim
 docs/BUILD-PROMPT.md PLAN.md DECISIONS.md QA-REPORT.md HANDOFF-M1.md … HANDOFF-M4.md
 legacy/index.html  legacy/images/*         untouched reference
 public/images/*.jpg                        source-of-truth photos (11)
-public/audio/.gitkeep                      optional wale-sample.mp3
+public/audio/.gitkeep                      optional kent-sample.mp3
 public/videos/.gitkeep                     optional self-hosted video
 scripts/optimize-images.mjs                §14
 scripts/prepare-deploy.mjs                 §15.4 verbatim
@@ -86,7 +86,7 @@ src/content/site.ts                        ALL copy, links, flags, messages (§6
 src/content/derive.ts                      ADDED (§16.2 Q6): pure flag helpers
 src/lib/whatsapp.ts                        link builder + message builders + date helpers
 src/lib/images.ts                          server-only manifest reader + pickVariant (OQ-8)
-src/lib/motion-preference.ts               useSyncExternalStore store, localStorage 'wale-motion'
+src/lib/motion-preference.ts               useSyncExternalStore store, localStorage 'kent-motion'
 src/lib/motion-tokens.ts                   ADDED (§10.2): spring specs + CSS linear() strings
 src/lib/quality-tier.ts                    detectTier(env), session ceiling, ?tier override
 src/lib/cosmos-bus.ts                      ADDED: mutable uniforms bus shared by DOM and 3D
@@ -246,7 +246,7 @@ Common rules: container `max-width:1200px; padding-inline:clamp(16px,4vw,40px)`;
 
 | # | Section (id) | Layout | Motion beats (motion on) | Motion off / no JS |
 |---|---|---|---|---|
-| 0 | Nav (`header`) | wordmark · 4 links · Message Wale; < 860px: wordmark · Message Wale · Menu | hide on scroll-down after 400px, show on scroll-up (`transform` only, spring `ui` via CSS `linear()`); never hidden while `:focus-within`; scroll-progress hairline (CSS scroll timeline) | static sticky nav; links are anchors; Message Wale = general `wa.me` |
+| 0 | Nav (`header`) | wordmark · 4 links · Message Kent; < 860px: wordmark · Message Kent · Menu | hide on scroll-down after 400px, show on scroll-up (`transform` only, spring `ui` via CSS `linear()`); never hidden while `:focus-within`; scroll-progress hairline (CSS scroll timeline) | static sticky nav; links are anchors; Message Kent = general `wa.me` |
 | 1 | Hero (`#top`) | 2 cols ≥ 900px (copy `minmax(460px,1fr)`, portrait ≤ 500px, right); stacked < 900px | **CSS only, pre-hydration**: rails scaleY 0→1 (18ms stagger) → eyebrow fade → H1 words rise 0.35em, blur 8→0, 70ms stagger, 900ms `cubic-bezier(.2,.8,.2,1)` → lead/CTAs/stats +180ms steps; total ≤ 1.4s. Portrait: scale 1.03→1 + brightness, never opacity 0; HUD ticks draw (stroke-dashoffset). FxLayer: tilt ≤ 6° perspective 1200px, sheen soft-light 8–12%, hover scanline. Coral dot breathe 2.4s. | gated by `@media (prefers-reduced-motion: no-preference)` and `html:not([data-motion="off"])`; everything visible at t=0 |
 | 2 | Paths (`#paths`) | 2 HudFrame cards ≥ 760px, stacked below | reveal rise, 120ms stagger; orbit SVG dot 12s loop (CSS, paused when off); FxLayer tilt ≤ 8° + inner translateZ 20px; click → Lenis scroll with -80 offset + `cosmos-bus.warpBurst(600ms)` | anchor jump; orbit static |
 | 3 | Chapter marker I | hairline + centred label + brass ticks | line scaleX from centre, then label fade; sets tint `wine` (ScrollTrigger `onToggle`) | static |
@@ -257,7 +257,7 @@ Common rules: container `max-width:1200px; padding-inline:clamp(16px,4vw,40px)`;
 | 8 | Hosts (`#hosts`) | 3-col, stacked phone, no carousel | cards float up with translateZ, 100ms stagger | static |
 | 9 | Coverage (`#coverage`) | constellation left / copy + chips right; stacked phone | Ajah→node lines draw (stroke-dashoffset scrub); Ajah ring pulse (CSS); chip↔node highlight via `:has()` (works without JS); tint `neutral` | lines drawn, no pulse |
 | 10 | Chapter marker II | as 3 | as 3; tint `amber` | static |
-| 11 | Lessons intro (`#lessons`) | copy + CTA left, `wale-sax-detail.jpg` in HudFrame + edge mask right | reveal rise; tint `amber` | static |
+| 11 | Lessons intro (`#lessons`) | copy + CTA left, `kent-sax-detail.jpg` in HudFrame + edge mask right | reveal rise; tint `amber` | static |
 | 12 | Lessons PAS (`#lessons-why`) | single column ≤ 760px | P1, P2, P3 one by one; brass hairline draws above P3 ("the turn") | static |
 | 13 | Who it’s for (`#lessons-who`) | 2×2, 1-up phone, line icons | reveal; FxLayer tilt ≤ 4° + spotlight | static |
 | 14 | Learning path (`#lessons-path`) | desktop: sticky left (`top:96px`) + right flight-path line; phone single column | brass signal scrubbed down the line; nodes ignite (scale 1→1.25 + glow) as passed | line + all nodes lit |
@@ -346,7 +346,7 @@ FAQ no-JS rule: answers are server-rendered expanded; `Accordion` collapses them
 
 **Lightbox**: content = `<picture>` with `pickVariant(…,1600)`, caption, counter, prev/next, close; video items per §9.5 (`<video controls playsInline preload="none" poster>` or external button from `videoAction`). ←/→ navigate. Touch: horizontal swipe navigate (6px threshold, velocity projection), vertical drag-down dismiss (1:1, rubber-band upward `y * 0.35`, dismiss when projected > 30% viewport height or v > 800px/s, else spring back `sheet`). Sets `cosmos-bus.dim = 1` while open.
 
-**Mobile Sheet**: Radix Dialog inside `BottomSheet`; 4 links + Message Wale + MotionToggle; drag-to-dismiss 1:1 with rubber-band above the open position, projected position > 50% sheet height → dismiss, else spring `sheet`. Link tap: close, then after the exit (`onAnimationComplete`) `lenis.scrollTo('#id', {offset:-80})` or `element.scrollIntoView()` when Lenis is off.
+**Mobile Sheet**: Radix Dialog inside `BottomSheet`; 4 links + Message Kent + MotionToggle; drag-to-dismiss 1:1 with rubber-band above the open position, projected position > 50% sheet height → dismiss, else spring `sheet`. Link tap: close, then after the exit (`onAnimationComplete`) `lenis.scrollTo('#id', {offset:-80})` or `element.scrollIntoView()` when Lenis is off.
 
 ---
 
@@ -425,7 +425,7 @@ Every handoff: `npm run lint && npm run build && npm run typecheck && node scrip
 | T1.1 | Dependencies per §3 exact; remove `@tailwindcss/turbopack`; `postcss.config.mjs`; `next.config.ts` §4.5 verbatim; `package.json` scripts §4.5 verbatim | plain `npm install` exit 0, no peer warnings; lockfile has 4 Linux natives; `next.config.ts` byte-identical to §4.5 |
 | T1.2 | `scripts/optimize-images.mjs` (§14) + `src/lib/images.ts` (`getImage`, `pickVariant`) | `public/_img/manifest.json` + avif/webp variants + `og.jpg` 1200×630; second run skips (logs "0 updated"); empty folder exits 0 |
 | T1.3 | `globals.css`: §5.3 tokens on `:root`, `@theme inline`, §5.4 type classes, §5.5 layout utilities, focus ring, `prefers-contrast`/`prefers-reduced-transparency` rules, `html[data-tier]` surfaces (OQ-17) | no colours outside §5.3; Tailwind utilities compile |
-| T1.4 | `layout.tsx`: fonts (§5.4 exact), `lang="en-NG"`, `suppressHydrationWarning`, inline `wale-motion` script, metadata + `viewport` (§13), `CosmosPoster`, SkipLink | fonts self-hosted in `out/_next/static/media`; no request to `fonts.googleapis.com` |
+| T1.4 | `layout.tsx`: fonts (§5.4 exact), `lang="en-NG"`, `suppressHydrationWarning`, inline `kent-motion` script, metadata + `viewport` (§13), `CosmosPoster`, SkipLink | fonts self-hosted in `out/_next/static/media`; no request to `fonts.googleapis.com` |
 | T1.5 | `src/content/site.ts` (§6 verbatim + §4.1 keys) and `derive.ts` | every §6 string present once; ’ “ ” typographic; `tsc` passes |
 | T1.6 | `src/lib/whatsapp.ts` (OQ-7, OQ-10) | Q28 strings exact |
 | T1.7 | UI primitives: Button, Picture, Eyebrow, SectionHeading, RichText, Chip, HudFrame, Icon | Button heights 44/48/56/60; `wa.me` links have `target="_blank" rel="noopener"` |
@@ -440,7 +440,7 @@ Gate 1 tests: CI, Q1–Q8, Q12, Q23, Q24 (page only), Q25, Q26, Q27, Q28, Q29 (f
 
 | Task | Work | Acceptance criteria |
 |---|---|---|
-| T2.1 | `motion-preference.ts` store + `MotionToggle` (footer, sheet) + `MotionProvider` | toggle persists in `wale-motion`; no flash for returning off users; `html[data-motion]` set |
+| T2.1 | `motion-preference.ts` store + `MotionToggle` (footer, sheet) + `MotionProvider` | toggle persists in `kent-motion`; no flash for returning off users; `html[data-motion]` set |
 | T2.2 | `motion-tokens.ts` (spring specs, CSS `linear()` strings, press) | `ui/snap/flick/sheet/reveal/press` exported; used everywhere instead of literals |
 | T2.3 | Hero CSS intro (§7.1) gated by media query + `data-motion` | total ≤ 1.4s; reduced motion → no intro |
 | T2.4 | `SmoothScroll` (deferred): Lenis root (`lerp .1, smoothWheel, syncTouch:false, anchors.offset -80, autoRaf:false`), GSAP ticker, `lagSmoothing(0)`, ScrollTrigger update, refresh after fonts + hero load, all reveal/scrub beats of §5, SplitText (`autoSplit`, `aria:'auto'`), chapter tints → `cosmos-bus` | Q13, Q14, Q16 pass; no `lenis` class when motion off |
@@ -478,7 +478,7 @@ Gate 3 tests: all earlier + Q19–Q22, Q2/Q3 at `?tier=high`, BUD (3D), VIS gall
 | T4.1 | `.github/workflows/deploy.yml` verbatim | Q29 diff clean |
 | T4.2 | Image pipeline polish: hero AVIF ≤ 120 KB at displayed size, `og.jpg` per §14 | BUD image check; `out/_img/og.jpg` exists |
 | T4.3 | SEO: metadata, OG/Twitter, JSON-LD `@graph` (Person + 2 Service, no ratings), canonical | Q26 |
-| T4.4 | README for Nonso/Wale (§15.6) incl. generated "Before launch: confirm with Wale" list from `derive.placeholderList` + CONFIRM flags | Q27 count match |
+| T4.4 | README for Nonso/Kent (§15.6) incl. generated "Before launch: confirm with Kent" list from `derive.placeholderList` + CONFIRM flags | Q27 count match |
 | T4.5 | Final perf pass against §12 | LH thresholds met |
 | T4.6 | Lockfile Linux-native check after final install | Q29 |
 

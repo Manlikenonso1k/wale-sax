@@ -9,7 +9,7 @@ import sharp from 'sharp';
 const SRC = join('public', 'images');
 const OUT = join('public', '_img');
 const WIDTHS = [480, 800, 1200, 1600];
-const OG_SOURCE = 'wale-hero.jpg';
+const OG_SOURCE = 'kent-hero.jpg';
 
 const isNewer = (out, src) => existsSync(out) && statSync(out).mtimeMs >= statSync(src).mtimeMs;
 

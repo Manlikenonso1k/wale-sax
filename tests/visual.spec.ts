@@ -22,7 +22,7 @@ for (const [w, h] of SIZES) {
     const ctx = await browser.newContext({ viewport: { width: w, height: h }, reducedMotion: 'reduce', deviceScaleFactor: 1 });
     await ctx.addInitScript(() => {
       try {
-        localStorage.setItem('wale-motion', 'off');
+        localStorage.setItem('kent-motion', 'off');
       } catch {}
     });
     const page = await ctx.newPage();

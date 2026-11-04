@@ -14,9 +14,9 @@ import {
   waLink,
 } from '@/lib/whatsapp';
 
-const BOOK = 'Hi Wale, I found your website and I’d like to book you.';
-const LESS = 'Hi Wale, I found your website and I’d like saxophone lessons.';
-const GEN = 'Hi Wale, I found your website and I have a question:';
+const BOOK = 'Hi Kent, I found your website and I’d like to book you.';
+const LESS = 'Hi Kent, I found your website and I’d like saxophone lessons.';
+const GEN = 'Hi Kent, I found your website and I have a question:';
 
 test('Q28: the process really runs west of UTC', () => {
   expect([420, 480]).toContain(new Date(2026, 10, 14).getTimezoneOffset());

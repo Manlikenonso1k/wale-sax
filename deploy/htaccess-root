@@ -1,4 +1,4 @@
-# Hostinger (LiteSpeed/Apache) settings for Wale's static Next.js export.
+# Hostinger (LiteSpeed/Apache) settings for Kent's static Next.js export.
 # Copied into out/ by scripts/prepare-deploy.mjs. Do not edit files in public_html directly.
 # HTTPS: turn on "Force HTTPS" in hPanel → Security → SSL (no redirect rules here, to avoid loops).
 

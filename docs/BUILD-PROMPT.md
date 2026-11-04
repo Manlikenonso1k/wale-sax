@@ -1,6 +1,6 @@
-# Wale — "Brass Cosmos" rebuild · Master build prompt
+# Kent — "Brass Cosmos" rebuild · Master build prompt
 
-> **Orchestrator note (22 Oct 2026):** Nonso confirmed Wale's WhatsApp number is now **0704 014 9133** (`2347040149133`). Every occurrence of the old number (0903 603 3056 / `2349036033056`) in this document has been replaced with the new one, including the "verbatim" `prepare-deploy.mjs` in §15.4. See `docs/DECISIONS.md` D-001.
+> **Orchestrator note (22 Oct 2026):** Nonso confirmed Kent's WhatsApp number is now **0704 014 9133** (`2347040149133`). Every occurrence of the old number (0903 603 3056 / `2349036033056`) in this document has been replaced with the new one, including the "verbatim" `prepare-deploy.mjs` in §15.4. See `docs/DECISIONS.md` D-001.
 
 You are the **orchestrator** for this build. You coordinate three subagents (a **Planner**, a **Frontend Designer** and a **QA Tester**) to turn the current static HTML landing page in this repository into an immersive, 3D, animated **Next.js** site. The site must deploy to **Hostinger** without anyone ever running a build on their own computer.
 
@@ -10,14 +10,14 @@ Read this whole document before doing anything. It is long on purpose: every dec
 
 ## 0. Mission
 
-**Who:** Wale is a saxophonist based in **Ajah, Lagos, Nigeria**. He does two things:
+**Who:** Kent is a saxophonist based in **Ajah, Lagos, Nigeria**. He does two things:
 
 1. **Performances.** Live saxophone at weddings, birthdays, proposals, dinners, launches, lounges and church events. He comes to the client ("home delivery") anywhere in Lagos.
 2. **Lessons.** He teaches the saxophone one-on-one.
 
 Clients reach him on **WhatsApp: 0704 014 9133** (international: `2347040149133`).
 
-**The one idea of the site (Rule of One):** *Wale brings the saxophone to your door.* Performances arrive at your event, and lessons arrive in your living room. Every section supports that sentence.
+**The one idea of the site (Rule of One):** *Kent brings the saxophone to your door.* Performances arrive at your event, and lessons arrive in your living room. Every section supports that sentence.
 
 **What exists now:** a hand-built static page, `index.html`, with an `images/` folder. It has a dark "pinstripe and brass" look: Bodoni Moda + Instrument Sans, near-black ground, brass `#D4A64A` accent. It covers performances only.
 
@@ -31,11 +31,11 @@ Clients reach him on **WhatsApp: 0704 014 9133** (international: `2347040149133`
 
 **What success looks like:**
 
-- A stranger understands within 5 seconds: who Wale is, that he plays events *and* teaches, that he comes to you, and how to message him.
+- A stranger understands within 5 seconds: who Kent is, that he plays events *and* teaches, that he comes to you, and how to message him.
 - It feels "out of this world" on a good laptop and still fast, readable and fully usable on a mid-range Android phone on mobile data.
 - Every booking path ends in a correctly pre-filled WhatsApp message to `2347040149133`.
 - Nonso pushes to `main` on GitHub → GitHub Actions builds → Hostinger serves the new version. Nobody runs `npm run build` locally, ever.
-- Wale or Nonso can change copy, prices and photos by editing one content file and swapping images with the same file names in the GitHub web editor.
+- Kent or Nonso can change copy, prices and photos by editing one content file and swapping images with the same file names in the GitHub web editor.
 
 ---
 
@@ -134,14 +134,14 @@ Phase 6  Orchestrator: final report to Nonso (§19)
 
 ### 2.4 When to stop and ask Nonso
 
-Only for decisions that cannot be undone or that need a fact only Wale has. Do **not** stop for design choices this document leaves open. Decide those and log them in `docs/DECISIONS.md`. Facts only Wale has are already handled by placeholders and flags (§6.1), so they never block the build.
+Only for decisions that cannot be undone or that need a fact only Kent has. Do **not** stop for design choices this document leaves open. Decide those and log them in `docs/DECISIONS.md`. Facts only Kent has are already handled by placeholders and flags (§6.1), so they never block the build.
 
 ### 2.5 Role briefs (pass verbatim)
 
 #### PLANNER
 
 ```
-You are the Planner for the Wale "Brass Cosmos" rebuild. Read docs/BUILD-PROMPT.md in
+You are the Planner for the Kent "Brass Cosmos" rebuild. Read docs/BUILD-PROMPT.md in
 full, then read the legacy page (legacy/index.html) and the repo tree. You do NOT write
 application code.
 
@@ -170,7 +170,7 @@ file names, component names, numbers. No filler.
 #### FRONTEND DESIGNER
 
 ```
-You are the Frontend Designer (designer + engineer) for the Wale "Brass Cosmos"
+You are the Frontend Designer (designer + engineer) for the Kent "Brass Cosmos"
 rebuild. Read docs/BUILD-PROMPT.md and docs/PLAN.md in full before writing code.
 You implement milestone by milestone (M1 → M4) exactly as planned.
 
@@ -195,7 +195,7 @@ Rules:
 #### QA TESTER
 
 ```
-You are the QA Tester for the Wale "Brass Cosmos" rebuild. You are independent: you
+You are the QA Tester for the Kent "Brass Cosmos" rebuild. You are independent: you
 did not build this, and your job is to find what is wrong before real clients do.
 Read docs/BUILD-PROMPT.md (especially §1, §16, §17) and docs/PLAN.md.
 
@@ -235,12 +235,12 @@ git mv images legacy/images
 # 2. Scaffold Next.js into a temporary folder (non-interactive).
 #    The folder name becomes the npm package name, so it must be a valid npm name:
 #    no leading dot, lowercase.
-npx create-next-app@16.4.2 wale-scaffold --ts --tailwind --eslint --app --src-dir \
+npx create-next-app@16.4.2 kent-scaffold --ts --tailwind --eslint --app --src-dir \
   --import-alias "@/*" --use-npm --disable-git --no-react-compiler --no-agents-md --empty --yes
 
-# 3. Move everything from wale-scaffold/ into the repo root (it contains no .git), then
-#    delete wale-scaffold/. Use a Node one-liner or your file tools (cross-platform).
-#    Set "name": "wale-sax" in package.json. Overwrite README.md (you rewrite it in M4).
+# 3. Move everything from kent-scaffold/ into the repo root (it contains no .git), then
+#    delete kent-scaffold/. Use a Node one-liner or your file tools (cross-platform).
+#    Set "name": "kent-sax" in package.json. Overwrite README.md (you rewrite it in M4).
 #    Merge .gitignore: keep the scaffold's (it ignores /.next/, /out/, next-env.d.ts, .env*)
 #    and add: /public/_img/  /qa/  /playwright-report/  /test-results/  /.lighthouseci/
 
@@ -259,8 +259,8 @@ The legacy images, and what they are:
 
 | File | Content |
 |---|---|
-| `wale-hero.jpg` | **Real photo** (Efizzy Studios): Wale in a black pinstripe double-breasted suit, coral bow tie and pocket square, holding a gold alto saxophone. Near-black background with a wine-red glow bottom-left. He looks to his left (screen-left). 1200×1553. |
-| `wale-sax-detail.jpg` | **Real photo:** close crop of his hands on the bell of the gold sax. 680×850. |
+| `kent-hero.jpg` | **Real photo** (Efizzy Studios): Kent in a black pinstripe double-breasted suit, coral bow tie and pocket square, holding a gold alto saxophone. Near-black background with a wine-red glow bottom-left. He looks to his left (screen-left). 1200×1553. |
+| `kent-sax-detail.jpg` | **Real photo:** close crop of his hands on the bell of the gold sax. 680×850. |
 | `occ-weddings.jpg`, `occ-birthdays.jpg`, `occ-proposals.jpg`, `occ-dinners.jpg` | Placeholders ("REPLACE IMAGE" cards), 800×1000, 4:5. |
 | `gal-video.jpg` | Placeholder, 1600×900, 16:9 (video poster). |
 | `gal-1.jpg` … `gal-4.jpg` | Placeholders, 900×900, 1:1. |
@@ -337,7 +337,7 @@ deploy/htaccess-static                # §15.3 (verbatim)
 docs/BUILD-PROMPT.md  PLAN.md  DECISIONS.md  QA-REPORT.md  HANDOFF-M1..M4.md
 legacy/index.html  legacy/images/*    # untouched reference
 public/images/*.jpg                   # SOURCE OF TRUTH photos (replace by same name)
-public/audio/                         # optional: wale-sample.mp3 (see §8.6)
+public/audio/                         # optional: kent-sample.mp3 (see §8.6)
 public/videos/                        # optional: self-hosted performance video
 scripts/optimize-images.mjs           # §14
 scripts/prepare-deploy.mjs            # §15.4 (verbatim)
@@ -506,7 +506,7 @@ Body defaults: Instrument Sans, 16px, line-height 1.5, `-webkit-font-smoothing: 
 
 | Role | Family | Weight / style | Size | Line-height | Tracking | Colour |
 |---|---|---|---|---|---|---|
-| Wordmark "Wale" | Bodoni Moda | 600 italic | 28px nav / 24px footer | 1 | −0.01em | ivory |
+| Wordmark "Kent" | Bodoni Moda | 600 italic | 28px nav / 24px footer | 1 | −0.01em | ivory |
 | Wordmark label "Saxophonist" | Instrument Sans | 600, uppercase | 11px | — | 0.24em | muted |
 | Eyebrow | Instrument Sans | 600, uppercase | 12px | — | 0.22em | brass (hero: muted, with coral dot) |
 | H1 | Bodoni Moda | 500 | `clamp(3rem, 6.2vw, 5.6rem)` | 0.98 | −0.025em | ivory; emphasis word italic brass |
@@ -559,9 +559,9 @@ Use inline stroke SVGs (1.8–2px stroke, round caps), sized 16–24px, `aria-hi
 
 ### 6.1 Placeholder and flag policy
 
-- **`[BRACKETS]`** mark facts only Wale can give: numbers, client words, handles. They render visibly as written, in the same style as real copy. Testimonial cards that are still placeholders get a **dashed** brass border (`1px dashed rgb(212 166 74 / .4)`); real ones get a solid hairline. Each card has a `placeholder: boolean`.
+- **`[BRACKETS]`** mark facts only Kent can give: numbers, client words, handles. They render visibly as written, in the same style as real copy. Testimonial cards that are still placeholders get a **dashed** brass border (`1px dashed rgb(212 166 74 / .4)`); real ones get a solid hairline. Each card has a `placeholder: boolean`.
 - **`null` values** hide the element or switch to the launch-safe fallback text written next to each field below. A launch-safe fallback contains no brackets and no claims.
-- **Flags marked CONFIRM** default to the most likely truth. The README's "Before launch: confirm with Wale" list names every one.
+- **Flags marked CONFIRM** default to the most likely truth. The README's "Before launch: confirm with Kent" list names every one.
 - Use typographic apostrophes and quotes (’ “ ”) in all copy. This also avoids ESLint's `react/no-unescaped-entities`.
 
 ### 6.2 `site.ts` shape (minimum; extend if needed, keep the names)
@@ -569,8 +569,8 @@ Use inline stroke SVGs (1.8–2px stroke, round caps), sized 16–24px, `aria-hi
 ```ts
 export const site = {
   siteUrl: 'https://YOUR-DOMAIN.com',          // CONFIRM before launch (used for canonical/OG/sitemap)
-  name: 'Wale',
-  fullName: null as string | null,              // e.g. 'Wale Adebayo' — shown in footer/JSON-LD if set
+  name: 'Kent',
+  fullName: null as string | null,              // e.g. 'Kent Adebayo' — shown in footer/JSON-LD if set
   role: 'Saxophonist',
   base: 'Ajah, Lagos',
   whatsapp: { number: '2347040149133', display: '0704 014 9133' },
@@ -598,13 +598,13 @@ export const site = {
     advisesOnInstruments: true,            // CONFIRM: will tell students what sax to buy
   },
   areas: ['Ajah','Lekki','Sangotedo','Ibeju-Lekki','Victoria Island','Ikoyi','Yaba','Surulere','Ikeja','Magodo','Festac'],
-  audioSample: null as string | null,      // e.g. '/audio/wale-sample.mp3' → enables §8.6
+  audioSample: null as string | null,      // e.g. '/audio/kent-sample.mp3' → enables §8.6
   gallery: [
-    { id: 'live-video', kind: 'video', image: 'gal-video.jpg', alt: 'Wale performing live', caption: 'Live set', videoSrc: null as string | null, externalUrl: null as string | null },
-    { id: 'live-1', kind: 'photo', image: 'gal-1.jpg', alt: 'Wale performing live', caption: '[Event, area]' },
-    { id: 'live-2', kind: 'photo', image: 'gal-2.jpg', alt: 'Wale performing live', caption: '[Event, area]' },
-    { id: 'live-3', kind: 'photo', image: 'gal-3.jpg', alt: 'Wale performing live', caption: '[Event, area]' },
-    { id: 'live-4', kind: 'photo', image: 'gal-4.jpg', alt: 'Wale performing live', caption: '[Event, area]' },
+    { id: 'live-video', kind: 'video', image: 'gal-video.jpg', alt: 'Kent performing live', caption: 'Live set', videoSrc: null as string | null, externalUrl: null as string | null },
+    { id: 'live-1', kind: 'photo', image: 'gal-1.jpg', alt: 'Kent performing live', caption: '[Event, area]' },
+    { id: 'live-2', kind: 'photo', image: 'gal-2.jpg', alt: 'Kent performing live', caption: '[Event, area]' },
+    { id: 'live-3', kind: 'photo', image: 'gal-3.jpg', alt: 'Kent performing live', caption: '[Event, area]' },
+    { id: 'live-4', kind: 'photo', image: 'gal-4.jpg', alt: 'Kent performing live', caption: '[Event, area]' },
   ],
   // …all section copy below, keyed by section
 } as const;
@@ -618,15 +618,15 @@ The gallery accepts 1–40 items. The README explains how to add a new image and
 
 **Nav**
 
-- Wordmark "Wale" + "Saxophonist".
+- Wordmark "Kent" + "Saxophonist".
 - Links: **Performances** (`#performances`), **Lessons** (`#lessons`), **Gallery** (`#gallery`), **FAQ** (`#faq`).
-- Button: **Message Wale**. It opens the Contact Menu (§9.4) anchored to the button. No JS: `href` = the general WhatsApp link.
-- Mobile (< 860px): wordmark + **Message Wale** + a **Menu** button that opens the Mobile Sheet (§9.7) with the four links.
+- Button: **Message Kent**. It opens the Contact Menu (§9.4) anchored to the button. No JS: `href` = the general WhatsApp link.
+- Mobile (< 860px): wordmark + **Message Kent** + a **Menu** button that opens the Mobile Sheet (§9.7) with the four links.
 
 **WhatsApp widget** (bottom-right, every page state)
 
-- Label chip (≥ 640px only): **Chat with Wale**.
-- Panel title: **Wale · Saxophonist**. Status line: **Replies on WhatsApp**.
+- Label chip (≥ 640px only): **Chat with Kent**.
+- Panel title: **Kent · Saxophonist**. Status line: **Replies on WhatsApp**.
 - Options (each an `<a>`):
   1. **Book a performance** (booking template)
   2. **Ask about lessons** (lessons template)
@@ -634,7 +634,7 @@ The gallery accepts 1–40 items. The README explains how to add a new image and
 
 **Footer**
 
-- "Wale" (+ `fullName` if set).
+- "Kent" (+ `fullName` if set).
 - **Live saxophonist & teacher · Ajah, Lagos · Plays and teaches anywhere in Lagos**
 - Links: **WhatsApp · 0704 014 9133**; **Instagram · [@handle]** (a link only when `instagram.url` is set); **Motion: On/Off** toggle; **© 2026 · Portrait by Efizzy Studios**.
 
@@ -642,12 +642,12 @@ The gallery accepts 1–40 items. The README explains how to add a new image and
 
 - **Eyebrow:** Live saxophonist & teacher · Ajah, Lagos *(coral live dot before it)*
 - **H1:** Live saxophone, *delivered* to your door. *("delivered" italic brass; author each word as its own `<span>` for the CSS intro, see §7.1)*
-- **Lead:** Book Wale to play your wedding, birthday or dinner — or learn to play yourself, with one-on-one lessons at home. Anywhere in Lagos.
-- **Primary CTA (L, brass):** Book Wale for your event → Booking Console
+- **Lead:** Book Kent to play your wedding, birthday or dinner — or learn to play yourself, with one-on-one lessons at home. Anywhere in Lagos.
+- **Primary CTA (L, brass):** Book Kent for your event → Booking Console
 - **Secondary CTA (L, outline):** Start saxophone lessons → Lessons Console
 - **Microcopy:** Both start with one WhatsApp message.
 - **Stats row:** the three `site.stats`, separated by a hairline above.
-- **Image:** `wale-hero.jpg`. Alt: "Wale in a black pinstripe suit and coral bow tie, holding a gold alto saxophone".
+- **Image:** `kent-hero.jpg`. Alt: "Kent in a black pinstripe suit and coral bow tie, holding a gold alto saxophone".
 
 ### 6.5 Paths (`#paths`)
 
@@ -689,13 +689,13 @@ The gallery accepts 1–40 items. The README explains how to add a new image and
   - `occ-birthdays.jpg`. **Birthdays & surprises.** He walks in playing their favourite song. You get to watch their face.
   - `occ-proposals.jpg`. **Proposals & anniversaries.** A private serenade at home or over dinner, for the question that matters most.
   - `occ-dinners.jpg`. **Dinners, launches & lounges.** Smooth live jazz that keeps guests at the table — for corporate nights, restaurants and beach clubs.
-  - Image alts, in the same order: "Wale playing at a wedding", "Wale surprising a birthday celebrant", "Wale serenading a couple at a proposal", "Wale playing at a dinner".
+  - Image alts, in the same order: "Kent playing at a wedding", "Kent surprising a birthday celebrant", "Kent serenading a couple at a proposal", "Kent playing at a dinner".
 - **Footer line:** Also thanksgiving services, naming ceremonies, graduations, house parties and album launches. If there are guests, he can play it.
 - **Button (outline):** Ask about your event → Booking Console
 
 **Pull quote** (placeholder)
 
-> “[A client’s words about the moment Wale walked in — ask a happy client for two sentences and paste them here.]”
+> “[A client’s words about the moment Kent walked in — ask a happy client for two sentences and paste them here.]”
 
 Caption: [Client name] · [Occasion], [Area]
 
@@ -713,7 +713,7 @@ Caption: [Client name] · [Occasion], [Area]
 
 - **Eyebrow:** Kind words
 - **H2:** What hosts say after the night.
-- **Card 1:** “[Before Wale: what they were worried about. After: what their guests said when he started playing.]”. [Client name] · [Wedding · Lekki]
+- **Card 1:** “[Before Kent: what they were worried about. After: what their guests said when he started playing.]”. [Client name] · [Wedding · Lekki]
 - **Card 2:** “[The surprise moment: who it was for, how they reacted, what it meant.]”. [Client name] · [Birthday · Ikoyi]
 - **Card 3:** “[Why they would book him again, or who they have already recommended him to.]”. [Client name] · [Corporate dinner · Victoria Island]
 
@@ -722,7 +722,7 @@ Caption: [Client name] · [Occasion], [Area]
 - **Eyebrow:** Home delivery
 - **H2:** Based in Ajah. *Plays — and teaches — anywhere.*
 - **P:** You don’t go to the music — the music comes to you. Your living room, your rooftop, the church hall, the hotel ballroom.
-- **P:** Lessons work the same way: Wale comes to your home, so Lagos traffic never stands between you and your practice. *(Show only if `lessons.home` is true.)*
+- **P:** Lessons work the same way: Kent comes to your home, so Lagos traffic never stands between you and your practice. *(Show only if `lessons.home` is true.)*
 - **Area chips:** `site.areas`, then a highlighted chip: …and everywhere in between
 - **Note:** Outside Lagos? Send the location and ask.
 - **Constellation caption** (small, faint): Stylised map — not to scale.
@@ -739,8 +739,8 @@ Caption: [Client name] · [Occasion], [Area]
   - If `home` is false and `online` is true: "One-on-one lessons by video call, wherever you are."
   - If both are true: "One-on-one lessons at your home in Lagos, or by video call."
 - **Primary CTA (brass):** Book a trial lesson → Lessons Console
-- **Microcopy:** if `lessons.trial` is set, "{trial} · Send your level and area on WhatsApp." Otherwise "Send your level and area on WhatsApp — Wale will suggest a plan."
-- **Image:** `wale-sax-detail.jpg`. Alt: "Close-up of Wale’s hands on the bell of his gold saxophone".
+- **Microcopy:** if `lessons.trial` is set, "{trial} · Send your level and area on WhatsApp." Otherwise "Send your level and area on WhatsApp — Kent will suggest a plan."
+- **Image:** `kent-sax-detail.jpg`. Alt: "Close-up of Kent’s hands on the bell of his gold saxophone".
 
 **Lessons PAS** (`#lessons-why`)
 
@@ -748,7 +748,7 @@ Caption: [Client name] · [Occasion], [Area]
 - **H2:** The saxophone isn’t hard. *Learning it alone is.*
 - **P1 (muted):** You’ve wanted to play for years. Maybe there’s a saxophone in your house right now, sitting in its case.
 - **P2 (muted):** So you try YouTube. You get a squeak, a sore lip and a lot of frustration — and nobody there to tell you why. The wrong habit sets in, progress stops, and the case closes for another year.
-- **P3 (emphasis, ivory):** Lessons with Wale fix that from the first session. He sits beside you, hears every note and corrects it on the spot. Then he teaches you the songs you actually want to play — not just exercises.
+- **P3 (emphasis, ivory):** Lessons with Kent fix that from the first session. He sits beside you, hears every note and corrects it on the spot. Then he teaches you the songs you actually want to play — not just exercises.
 
 **Who it’s for** (`#lessons-who`)
 
@@ -776,11 +776,11 @@ Caption: [Client name] · [Occasion], [Area]
 - **Eyebrow:** Lesson formats
 - **H2:** Lessons that *come to you.*
 - **Cards** (render only enabled ones):
-  - **Home lessons** (`home`). Wale comes to your home, anywhere in Lagos. One-on-one{lessonLength ? `, ${lessonLength} per lesson` : ''}.
+  - **Home lessons** (`home`). Kent comes to your home, anywhere in Lagos. One-on-one{lessonLength ? `, ${lessonLength} per lesson` : ''}.
   - **Online lessons** (`online`). Live video lessons from wherever you are. Same teacher, same feedback.
   - **Learn together** (`group`). Siblings, friends or a church band learning side by side.
   - Each card's price line: `lessons.price` if set, else "Ask for a price on WhatsApp".
-- **Note** (only if `advisesOnInstruments`): No saxophone yet? Ask Wale before you buy — a bad beginner instrument makes everything harder.
+- **Note** (only if `advisesOnInstruments`): No saxophone yet? Ask Kent before you buy — a bad beginner instrument makes everything harder.
 - **CTA (brass):** Book a trial lesson → Lessons Console
 
 **Student testimonials** (`#students`; three placeholder cards)
@@ -821,12 +821,12 @@ Caption: [Client name] · [Occasion], [Area]
 
 1. **I’ve never played. Is that okay?** Yes. Lessons start from the very beginning: holding the saxophone, breathing, and your first notes.
 2. **Do I need my own saxophone?**
-   - If `advisesOnInstruments`: You’ll need one to practise between lessons. If you don’t have one yet, ask Wale before you buy — he’ll tell you what to look for.
+   - If `advisesOnInstruments`: You’ll need one to practise between lessons. If you don’t have one yet, ask Kent before you buy — he’ll tell you what to look for.
    - Otherwise: You’ll need one to practise between lessons.
 3. **How old do you have to be?** *(Only if `youngLearners.enabled`.)*
    - If `minAge` is set: Lessons are for adults and young learners from age {minAge}.
-   - Otherwise: Adults and young learners are both welcome — send the student’s age on WhatsApp and Wale will tell you if it’s a good time to start.
-4. **How often are lessons, and how much?** Send your level, area and preferred days on WhatsApp, and Wale will suggest a schedule and price. *(+ " Lessons are {price}." if set)*
+   - Otherwise: Adults and young learners are both welcome — send the student’s age on WhatsApp and Kent will tell you if it’s a good time to start.
+4. **How often are lessons, and how much?** Send your level, area and preferred days on WhatsApp, and Kent will suggest a schedule and price. *(+ " Lessons are {price}." if set)*
 5. **Can I learn gospel, Afrobeats or jazz specifically?** Yes. Tell him the music you love in your first message — your lessons are built around the songs you want to play.
 
 ### 6.11 Final CTA (`#contact`)
@@ -834,7 +834,7 @@ Caption: [Client name] · [Occasion], [Area]
 - **Eyebrow:** Your move
 - **H2:** Hear him live, or learn to play. *Either way, he comes to you.*
 - **P:** One saxophonist, one event a night — and only so many lesson slots in a week. If your date or your start matters, send the message now.
-- **CTA 1 (XL, brass):** Check Wale’s availability → Booking Console
+- **CTA 1 (XL, brass):** Check Kent’s availability → Booking Console
 - **CTA 2 (XL, outline):** Book a trial lesson → Lessons Console
 - **Microcopy:** Prefer to call? **0704 014 9133** (`tel:+2347040149133`)
 
@@ -870,7 +870,7 @@ Motion beats reference the tokens in §10.2. "Reveal" means a one-time entrance 
   - Pointer tilt on `pointer: fine`: rotateX/Y ≤ 6°, perspective 1200px, spring (§10.2 `ui`).
   - Holographic sheen: a brass→ivory linear gradient at 8–12% opacity with `mix-blend-mode: soft-light`, following the pointer.
   - A faint scanline overlay appears on hover only.
-- **Gaze cue:** Wale looks screen-left, toward the copy and CTAs. Keep the portrait on the **right** at desktop widths.
+- **Gaze cue:** Kent looks screen-left, toward the copy and CTAs. Keep the portrait on the **right** at desktop widths.
 - **Audio sample (optional, §8.6):** a small "Hear a phrase" text button under the microcopy, only if `site.audioSample` is set.
 
 ### 7.2 Paths
@@ -922,7 +922,7 @@ Motion beats reference the tokens in §10.2. "Reveal" means a one-time entrance 
 
 ### 7.9 Coverage
 
-- **Layout:** `wale-sax-detail.jpg` is **not** used here (it belongs to Lessons). Use the **constellation** (SVG) on the left and copy plus area chips on the right; stacked on phones.
+- **Layout:** `kent-sax-detail.jpg` is **not** used here (it belongs to Lessons). Use the **constellation** (SVG) on the left and copy plus area chips on the right; stacked on phones.
 - **Constellation:**
   - An abstract west→east layout: Mainland nodes (Ikeja, Magodo, Yaba, Surulere, Festac) on the left, Island nodes (Ikoyi, Victoria Island) in the centre, Lekki corridor nodes (Lekki, Ajah, Sangotedo, Ibeju-Lekki) on the right.
   - **Ajah** is the home node: a larger brass node with a slow pulsing ring and the label "Base".
@@ -934,7 +934,7 @@ Motion beats reference the tokens in §10.2. "Reveal" means a one-time entrance 
 
 ### 7.10 Lessons intro
 
-- **Layout:** two columns: copy and CTA left, `wale-sax-detail.jpg` right in a HUD frame with the same edge-mask treatment as the hero. Stacked on phones.
+- **Layout:** two columns: copy and CTA left, `kent-sax-detail.jpg` right in a HUD frame with the same edge-mask treatment as the hero. Stacked on phones.
 - **Cosmos tint:** shifts to amber-brass (§8.2) while the Lessons chapter is in view.
 
 ### 7.11 Lessons PAS
@@ -1145,7 +1145,7 @@ When `site.audioSample` is set:
 
 ### 9.2 Booking Console
 
-- **Title:** Book Wale. **Subtitle:** Answer a few quick questions — your WhatsApp message writes itself.
+- **Title:** Book Kent. **Subtitle:** Answer a few quick questions — your WhatsApp message writes itself.
 - **Fields** (all optional; native inputs):
   1. **Occasion** (radio chips): Wedding · Birthday or surprise · Proposal or anniversary · Dinner or corporate event · Church or thanksgiving · Something else
   2. **Date:** `<input type="date">`, plus a checkbox **Date not fixed yet** that disables the date input. `min` is set to today **on the client after mount** (never during render, to avoid a hydration mismatch).
@@ -1159,7 +1159,7 @@ When `site.audioSample` is set:
 
 ### 9.3 Lessons Console
 
-- **Title:** Start lessons. **Subtitle:** Tell Wale where you’re starting — he’ll suggest a plan.
+- **Title:** Start lessons. **Subtitle:** Tell Kent where you’re starting — he’ll suggest a plan.
 - **Fields:**
   1. **Who’s learning?** (radio chips): Me · My child · Someone else
   2. **Age** (number, optional). Show it only when "My child" or "Someone else" is selected.
@@ -1174,12 +1174,12 @@ When `site.audioSample` is set:
 - **Widget button:**
   - Fixed bottom-right at `clamp(16px, 3vw, 28px)` from both edges, plus `env(safe-area-inset-bottom)`.
   - A 60px circle in `--wa`, with the white WhatsApp glyph (simple-icons) at 30px.
-  - `aria-label="Chat with Wale on WhatsApp"`, `aria-expanded`.
-  - The label chip "Chat with Wale" shows to its left at ≥ 640px.
+  - `aria-label="Chat with Kent on WhatsApp"`, `aria-expanded`.
+  - The label chip "Chat with Kent" shows to its left at ≥ 640px.
   - Z-index above content and below modals.
 - **Panel:**
   - Pops up from the button (origin bottom-right) on spring `ui`; the options stagger in at 40ms.
-  - Header: "Wale · Saxophonist" + "Replies on WhatsApp".
+  - Header: "Kent · Saxophonist" + "Replies on WhatsApp".
   - Three options (§6.3), each a full-width 48px `<a>` row with an icon.
   - A close button.
 - **No-JS behaviour:** the widget is an `<a>` straight to the general template.
@@ -1215,7 +1215,7 @@ The number is digits only, in international format, with no `+` and no leading `
 **Booking** (default/no-JS version: all values blank):
 
 ```
-Hi Wale, I found your website and I’d like to book you.
+Hi Kent, I found your website and I’d like to book you.
 Occasion: {occasion}
 Date: {date | "Not fixed yet"}
 Location: {location}
@@ -1226,7 +1226,7 @@ Guests: {guests}
 **Lessons** (default/no-JS version: all values blank):
 
 ```
-Hi Wale, I found your website and I’d like saxophone lessons.
+Hi Kent, I found your website and I’d like saxophone lessons.
 Who’s learning: {who}{age ? ` (age ${age})` : ''}
 Experience: {experience}
 Format: {format}
@@ -1237,7 +1237,7 @@ Preferred days: {days joined with ", "}
 **General:**
 
 ```
-Hi Wale, I found your website and I have a question:
+Hi Kent, I found your website and I have a question:
 ```
 
 Rules:
@@ -1249,7 +1249,7 @@ Rules:
 
 ### 9.7 Mobile Sheet (menu)
 
-- On < 860px, the Menu button opens a bottom sheet with the four section links, "Message Wale", and the Motion toggle.
+- On < 860px, the Menu button opens a bottom sheet with the four section links, "Message Kent", and the Motion toggle.
 - Drag-to-dismiss: 1:1 tracking with rubber-banding above the open position. On release, use velocity projection: dismiss if the projected position is past 50% of the sheet's height, else spring back (spring `sheet`).
 - Tapping a link closes the sheet, then scrolls to the section.
 
@@ -1289,8 +1289,8 @@ Rules:
 
 ### 10.4 Motion preference (`src/lib/motion-preference.ts`)
 
-- One store (`useSyncExternalStore`) combines the OS `prefers-reduced-motion` with the user's **Motion** toggle, saved to `localStorage` key `wale-motion` (wrap every access in try/catch). Default = on, unless the OS asks to reduce motion.
-- **No flash for returning "motion off" users:** a tiny inline `<script>` in `<head>` (in `layout.tsx`, via `dangerouslySetInnerHTML`, about 150 bytes, inside try/catch) reads `wale-motion` and sets `data-motion="off"` on `<html>` before first paint.
+- One store (`useSyncExternalStore`) combines the OS `prefers-reduced-motion` with the user's **Motion** toggle, saved to `localStorage` key `kent-motion` (wrap every access in try/catch). Default = on, unless the OS asks to reduce motion.
+- **No flash for returning "motion off" users:** a tiny inline `<script>` in `<head>` (in `layout.tsx`, via `dangerouslySetInnerHTML`, about 150 bytes, inside try/catch) reads `kent-motion` and sets `data-motion="off"` on `<html>` before first paint.
   - Gate the hero's CSS intro on `@media (prefers-reduced-motion: no-preference)` **and** `html:not([data-motion="off"])`.
   - Use JS-driven effects from the store.
 - **When off:**
@@ -1358,14 +1358,14 @@ Rules:
 
 - **`metadata` in `layout.tsx` / `page.tsx`:**
   - `metadataBase: new URL(site.siteUrl)`
-  - **Title:** `Wale | Saxophonist for Hire & Saxophone Lessons in Lagos`
-  - **Description:** `Book Wale, a live saxophonist based in Ajah, for weddings, birthdays and events anywhere in Lagos, or learn the sax with one-on-one lessons at home.` (148 characters)
+  - **Title:** `Kent | Saxophonist for Hire & Saxophone Lessons in Lagos`
+  - **Description:** `Book Kent, a live saxophonist based in Ajah, for weddings, birthdays and events anywhere in Lagos, or learn the sax with one-on-one lessons at home.` (148 characters)
   - `alternates.canonical: '/'`
   - Theme colour goes in a separate `export const viewport = { themeColor: '#0A090B' }`, **not** in `metadata` (deprecated there)
   - Open Graph: type website, the same title, the description, image `/_img/og.jpg` 1200×630, locale `en_NG`
   - `twitter.card: summary_large_image`
 - **JSON-LD** in `page.tsx`: render with `JSON.stringify(data).replace(/</g, '\\u003c')`. Use an `@graph` containing:
-  - **`Person`:** `@id: siteUrl + '/#wale'`, name, jobTitle Saxophonist, image, telephone `+2347040149133`, address (Ajah, Lagos, NG), `sameAs` = the Instagram URL if set
+  - **`Person`:** `@id: siteUrl + '/#kent'`, name, jobTitle Saxophonist, image, telephone `+2347040149133`, address (Ajah, Lagos, NG), `sameAs` = the Instagram URL if set
   - **Two `Service` entries** ("Live saxophone performance", "Saxophone lessons"), each with `provider` → the Person `@id` and `areaServed` City Lagos
   - **No `AggregateRating` or `Review`.**
 - **`app/robots.ts`** (allow all, sitemap URL) and **`app/sitemap.ts`** (one URL, `/`), both with `export const dynamic = 'force-static'`. `prepare-deploy.mjs` fails the build if `out/robots.txt` or `out/sitemap.xml` is missing. If that happens, generate both into `public/` from `site.ts` in `scripts/optimize-images.mjs` instead, and log the decision.
@@ -1375,10 +1375,10 @@ Rules:
 
 ## 14. Images and replaceable assets (`scripts/optimize-images.mjs`)
 
-- **Input:** every `public/images/*.{jpg,jpeg,png,webp}`. This folder is the source of truth; Nonso and Wale replace files here by **same name**.
+- **Input:** every `public/images/*.{jpg,jpeg,png,webp}`. This folder is the source of truth; Nonso and Kent replace files here by **same name**.
 - **Output (gitignored, regenerated on every `dev` and `build`):** `public/_img/`
   - For each width in [480, 800, 1200, 1600] that is ≤ the source width (if the source is narrower than 480, use its own width): `<name>-<w>.avif` (quality 50, effort 4) and `<name>-<w>.webp` (quality 72).
-  - `public/_img/og.jpg`: 1200×630 on `#0A090B`, with `wale-hero.jpg` fitted to the full height on the right third and a 1px brass hairline frame inset 24px (an SVG overlay, **no text**). JPEG quality 82.
+  - `public/_img/og.jpg`: 1200×630 on `#0A090B`, with `kent-hero.jpg` fitted to the full height on the right third and a 1px brass hairline frame inset 24px (an SVG overlay, **no text**). JPEG quality 82.
   - `public/_img/manifest.json`: `{ "<file name>": { "width", "height", "avif": "<srcset>", "webp": "<srcset>", "src": "/images/<file name>" } }`.
 - **Behaviour:**
   - Skip work when an output is newer than its source (fast dev).
@@ -1482,7 +1482,7 @@ The publish step was dry-run against a local bare repository. It handles the fir
 `deploy/htaccess-root`, copied to `out/.htaccess`:
 
 ```apache
-# Hostinger (LiteSpeed/Apache) settings for Wale's static Next.js export.
+# Hostinger (LiteSpeed/Apache) settings for Kent's static Next.js export.
 # Copied into out/ by scripts/prepare-deploy.mjs. Do not edit files in public_html directly.
 # HTTPS: turn on "Force HTTPS" in hPanel → Security → SSL (no redirect rules here, to avoid loops).
 
@@ -1544,7 +1544,7 @@ copyFileSync(join('deploy', 'htaccess-static'), join(OUT, '_next', 'static', '.h
 
 const required = [
   'index.html', '404.html', '.htaccess', '_next/static/.htaccess',
-  'robots.txt', 'sitemap.xml', '_img/og.jpg', 'images/wale-hero.jpg',
+  'robots.txt', 'sitemap.xml', '_img/og.jpg', 'images/kent-hero.jpg',
 ];
 const missing = required.filter((f) => !existsSync(join(OUT, f)));
 if (missing.length) fail(`missing from out/: ${missing.join(', ')}`);
@@ -1592,7 +1592,7 @@ From then on, every push to `main` (including edits made in the GitHub website) 
 
 ### 15.6 README (written in M4)
 
-The README is for Nonso and Wale, in plain language. It must cover:
+The README is for Nonso and Kent, in plain language. It must cover:
 
 - what the site is
 - how to edit text and prices (`src/content/site.ts` via the GitHub web editor)
@@ -1602,7 +1602,7 @@ The README is for Nonso and Wale, in plain language. It must cover:
 - the Hostinger one-time setup (§15.5)
 - how to preview locally (optional): `npm install`, `npm run dev`, or `npm run build && npm run preview`
 - troubleshooting: Actions failed, a change didn't appear, a 404 shows on refresh
-- **"Before launch: confirm with Wale"**: every CONFIRM flag and `[BRACKET]` placeholder, as a checklist
+- **"Before launch: confirm with Kent"**: every CONFIRM flag and `[BRACKET]` placeholder, as a checklist
 
 ---
 
@@ -1822,7 +1822,7 @@ Record findings with the screenshot paths.
 - [ ] Tests 1–29 PASS (or SKIPPED with a reason the Orchestrator accepted).
 - [ ] Lighthouse thresholds met (§12).
 - [ ] `docs/PLAN.md`, `docs/DECISIONS.md`, `docs/HANDOFF-M1..M4.md` and `docs/QA-REPORT.md` are complete.
-- [ ] README written for non-developers, including the "Before launch: confirm with Wale" checklist and the Hostinger steps.
+- [ ] README written for non-developers, including the "Before launch: confirm with Kent" checklist and the Hostinger steps.
 - [ ] `.claude/agents/*.md` saved.
 - [ ] Clean commits on `rebuild`, merged into `main` after Gate 4. The workflow file is present. **Nothing pushed to `deploy` by hand.**
 - [ ] The final report has been delivered (§19).
@@ -1833,7 +1833,7 @@ Keep it short, plain and scannable:
 
 1. **What was built:** 3–5 lines. Name the hero moment, the gallery, the two chapters and the pop-ups.
 2. **How to go live:** the §15.5 steps, numbered.
-3. **What Wale needs to send:** every placeholder and CONFIRM flag, grouped as Numbers, Lessons details, Testimonials, Photos/video, Links, Domain.
+3. **What Kent needs to send:** every placeholder and CONFIRM flag, grouped as Numbers, Lessons details, Testimonials, Photos/video, Links, Domain.
 4. **Results:** the Lighthouse scores and the QA gate summary (one line per gate).
 5. **Known limitations:** anything SKIPPED, and why.
 6. **One suggested next step.**

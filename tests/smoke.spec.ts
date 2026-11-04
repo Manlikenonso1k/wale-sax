@@ -9,7 +9,7 @@ import { plain, scrollThrough, onlyProject } from './helpers';
 test('Q1: / returns 200, has the §13 title and exactly one h1 containing "Live saxophone"', async ({ page }) => {
   const res = await page.goto('/');
   expect(res?.status()).toBe(200);
-  await expect(page).toHaveTitle('Wale | Saxophonist for Hire & Saxophone Lessons in Lagos');
+  await expect(page).toHaveTitle('Music by Kent (MBK) 🎷 | Live Saxophonist & Music Lessons in Lagos');
   await expect(page.locator('h1')).toHaveCount(1);
   await expect(page.locator('h1')).toContainText('Live saxophone');
 });
@@ -67,7 +67,7 @@ test('Q4a: out/ contains every file prepare-deploy.mjs requires', async () => {
   onlyProject('desktop-chromium');
   const required = [
     'index.html', '404.html', '.htaccess', '_next/static/.htaccess',
-    'robots.txt', 'sitemap.xml', '_img/og.jpg', 'images/wale-hero.jpg',
+    'robots.txt', 'sitemap.xml', '_img/og.jpg', 'images/kent-hero.jpg',
   ];
   const missing = required.filter((f) => !existsSync(join('out', f)));
   expect(missing).toEqual([]);
@@ -85,7 +85,7 @@ test('Q4b: /does-not-exist serves the branded 404 page', async ({ page }) => {
   await expect(home).toBeVisible();
   expect(await home.getAttribute('href')).toBe('/');
   // §6.12: plus the WhatsApp widget
-  await expect(page.locator('a[aria-label="Chat with Wale on WhatsApp"]')).toBeVisible();
+  await expect(page.locator('a[aria-label="Chat with Kent on WhatsApp"]')).toBeVisible();
   // Same fonts (Bodoni on the H1)
   const ff = await page.locator('h1').evaluate((el) => getComputedStyle(el).fontFamily);
   expect(ff).toMatch(/Bodoni/);

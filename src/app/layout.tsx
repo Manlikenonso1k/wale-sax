@@ -41,7 +41,7 @@ export const viewport: Viewport = {
 
 // Sets data-motion="off" before first paint for returning “motion off” visitors (§10.4).
 const motionScript =
-  "try{if(localStorage.getItem('wale-motion')==='off')document.documentElement.setAttribute('data-motion','off')}catch(e){}";
+  "try{if(localStorage.getItem('kent-motion')==='off')document.documentElement.setAttribute('data-motion','off')}catch(e){}";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
